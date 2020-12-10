@@ -1,0 +1,250 @@
+﻿@model jctravel01.Models.HRInfo
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>HRInfo</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.EmpNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmpNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EmpEnName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmpEnName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EmpName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmpName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.JobManager)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.JobManager)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.JobTitle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.JobTitle)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EmpID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmpID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EmpBday)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmpBday)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ComPhone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ComPhone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ComExt)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ComExt)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ComEmail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ComEmail)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HomeAddres)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HomeAddres)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ContactAddres)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ContactAddres)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PrivateMail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PrivateMail)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PrivatePhone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PrivatePhone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UrgentName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UrgentName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RelationUrgent)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RelationUrgent)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UrgentPhone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UrgentPhone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OnJobStatus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OnJobStatus)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OnBoardDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OnBoardDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ResignDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ResignDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreateBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreateBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreateBy_Time)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreateBy_Time)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UpdateBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UpdateBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UpdateBy_Time)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UpdateBy_Time)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AllowLogIn)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AllowLogIn)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CoIndex.ComName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CoIndex.ComName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DepIndex.CompanyNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DepIndex.CompanyNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.JobGruopIndex.CompanyNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.JobGruopIndex.CompanyNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.JobLevelIndex.CompanyNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.JobLevelIndex.CompanyNo)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.EmpIndex }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,50 @@
+﻿@model IEnumerable<jctravel01.Models.Authorze_index>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Permit)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PermiIndex1.AltPerName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @if (item.Permit == 1)
+            {
+                @:讀取
+            }
+            else if (item.Permit == 2)
+            {
+                @:修改
+            }
+            else if (item.Permit == 3)
+            {
+                @:共用
+            }
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PermiIndex1.AltPerName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.AutIndex }) |
+            @Html.ActionLink("Details", "Details", new { id=item.AutIndex }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.AutIndex })
+        </td>
+    </tr>
+}
+
+</table>

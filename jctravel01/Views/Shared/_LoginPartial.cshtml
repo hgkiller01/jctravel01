@@ -1,0 +1,20 @@
+﻿@if (Session["UserName"] != null && Session["UserID"] !=null)
+{
+    using (Html.BeginForm("LogOut", "Home", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+    @Html.AntiForgeryToken()
+    
+    <ul class="nav navbar-nav navbar-right">
+        <li>
+            @Html.ActionLink( Session["UserName"] +"，你好!", "CPassWord", "MemberLogin", new { id = Session["UserID"] }, htmlAttributes: new { title = "更改密碼" })
+        </li>
+        <li><a href="javascript:document.getElementById('logoutForm').submit()">登出</a></li>
+    </ul>
+    }
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right">
+        <li>@Html.ActionLink("登入", "Index", new {Controller = "MemberLogin" }, htmlAttributes: new { id = "loginLink" })</li>
+    </ul>
+}

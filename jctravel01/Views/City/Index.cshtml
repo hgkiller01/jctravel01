@@ -1,0 +1,153 @@
+﻿@model IPagedList<jctravel01.Models.City03>
+
+@{
+    ViewBag.Title = "城市列表";
+}
+
+<h2>城市列表</h2>
+@section styles{
+    <link rel="stylesheet" href="~/Content/PagedList.css" />
+<style>
+    th {
+        white-space: nowrap;
+    }
+</style>
+
+}
+@section scripts{
+    <script>
+        $("#reset").click(function () {
+            $(".form-control").val("");
+            return false;
+        })
+    </script>
+}
+@{
+    int colorNum = 1;
+    string color = "antiquewhite"; @*設定表格顏色*@
+    string trColor = "";
+    int RowsCountMin = ViewBag.RowCountMin;
+}
+@using (Html.BeginForm())
+{
+    <fieldset>
+        <legend>快速查詢</legend>
+        <div class="form-inline">
+            <div class="form-group col-md-3">
+                @Html.LabelFor(model => model.FirstOrDefault().City_no, htmlAttributes: new { @class = "control-label" })
+                @Html.Editor("City_no", new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+            <div class="form-group col-md-3">
+                @Html.LabelFor(model => model.FirstOrDefault().Cname, htmlAttributes: new { @class = "control-label" })
+                @Html.Editor("Cname", new { htmlAttributes = new { @class = "form-control" } })
+            </div>           
+            <div class="form-group col-md-4">
+                @Html.LabelFor(model => model.FirstOrDefault().Ename, htmlAttributes: new { @class = "control-label" })
+                @Html.Editor("Ename", new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+            <div class="form-group col-md-2">
+                @Html.LabelFor(model => model.FirstOrDefault().Status, htmlAttributes: new { @class = "control-label" })
+                @Html.DropDownList("Status", ViewBag.StatusNum as SelectList, "請選擇", htmlAttributes: new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-inline col-md-offset-5 ">
+            <div class="form-group">
+                @Html.LabelFor(model => model.FirstOrDefault().CountryIndex, htmlAttributes: new { @class = "control-label" })
+                @Html.DropDownList("CountryIndex", ViewBag.CountryIndexList as SelectList, "請選擇", htmlAttributes: new { @class = "form-control" })
+            </div>
+            <input type="hidden" name="Page" value="1" />
+            <input type="submit" class="btn btn-success" value="送出查詢" />
+            <a id="reset" href="#" class="btn btn-warning">清空</a>
+        </div>
+    </fieldset>
+}
+<p>
+    @Html.ActionLink("新增城市", "Create", null, htmlAttributes: new { @class = "btn btn-primary" })
+</p>
+<table class="table">
+    <tr style="background-color:@color">
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().City_no)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().ShortName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Cname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Ename)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Tele_Area)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Airport_type)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().UTC)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Daylight_DateTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Order)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        if (colorNum % 2 != 0)
+        {
+            color = "#b8f1f3";
+        }
+        else
+        {
+            color = "antiquewhite";
+        }
+        if (item.Status == 1)
+        {
+            trColor = "blueviolet";
+        }
+        else
+        {
+            trColor = "dimgray";
+        }
+        colorNum++;
+        <tr style="background-color:@color;color:@trColor;">
+            <td>
+                @(RowsCountMin++)
+                @Html.ActionLink(item.City_no, "Edit", new { id = item.CityIndex }, htmlAttributes: new { @class = "btn btn-primary" })
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ShortName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ename)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tele_Area)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Airport_type)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UTC)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Daylight_DateTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Order)
+            </td>
+        </tr>
+    }
+
+</table>
+<h5 style="margin:0 auto; width:10%; color:blue;">共 @ViewBag.DataCount 筆資料</h5>
+<div class="pager">
+@Html.PagedListPager(Model, Page => Url.Action("Index", new { Page, ViewBag.CityIndex, ViewBag.Cname, ViewBag.Ename, ViewBag.Status }))
+</div>

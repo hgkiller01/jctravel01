@@ -1,0 +1,142 @@
+﻿@model jctravel01.Models.AirlineOffice
+
+@{
+    ViewBag.Title = "新增辦事處";
+}
+@section scripts{
+<script>
+        $(function () {
+            $("#CountryIndex").change(function () {
+                var selectedValue = $('#CountryIndex option:selected').val();
+                if ($.trim(selectedValue).length > 0) {
+                    GetState_no(selectedValue);
+                }
+            })
+        })
+        function GetState_no(CountryIndex) {
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("GetCity_no")",
+                data: { CountryIndex: CountryIndex },
+                dataType: 'json',
+                success: function (data) {
+                    if (data.length > 0) {
+                        $("#CityIndex").empty();
+                        $.each(data, function (i, item) {
+                            $('#CityIndex').append($('<option></option>').val(item.CityIndex).text(item.City_no+" "+item.Cname));
+                        })
+                    }
+                    else {
+                        $("#CityIndex").empty();
+                        $('#CityIndex').append($('<option></option>').val('').text('------'));
+                    }
+                }
+
+            })
+        }
+
+
+</script>
+}
+<h2>新增辦事處</h2>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+
+        <h4>請填取下列資料</h4>
+        <hr />
+    <div class="form-inline">
+        <div class="form-group">
+            @Html.LabelFor(model => model.AirlineIndex, htmlAttributes: new { @class = "control-label col-md-8" })
+            <div class="col-md-10 input-group">
+                <span class="input-group-addon" style="color:red">*</span>
+                @Html.DropDownList("AirlineIndex", null, htmlAttributes: new { @class = "form-control" })              
+            </div>
+            <p>@Html.ValidationMessageFor(model => model.AirlineIndex, "", new { @class = "text-danger" })</p>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CountryIndex, htmlAttributes: new { @class = "control-label col-md-8" })
+            <div class="col-md-10 input-group">
+                <span class="input-group-addon" style="color:red">*</span>
+                @Html.DropDownList("CountryIndex", null, htmlAttributes: new { @class = "form-control" })                
+            </div>
+            <p>@Html.ValidationMessageFor(model => model.CountryIndex, "", new { @class = "text-danger" })</p>
+        </div>
+    </div>
+    <div class="form-inline">
+        <div class="form-group">
+            @Html.LabelFor(model => model.CityIndex, htmlAttributes: new { @class = "control-label col-md-8" })
+            <div class="col-md-10 input-group">
+                <span class="input-group-addon" style="color:red">*</span>
+                @Html.DropDownList("CityIndex", null, htmlAttributes: new { @class = "form-control" })                
+            </div>
+            <p>@Html.ValidationMessageFor(model => model.CityIndex, "", new { @class = "text-danger" })</p>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Tele_Order, htmlAttributes: new { @class = "control-label col-md-8" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Tele_Order, new { htmlAttributes = new { @class = "form-control", placeholder = "3980-1111" } })
+                @Html.ValidationMessageFor(model => model.Tele_Order, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <div class="form-inline">
+        <div class="form-group">
+            @Html.LabelFor(model => model.Office_Number, htmlAttributes: new { @class = "control-label col-md-8" })
+            <div class="col-md-10 input-group">
+                <span class="input-group-addon" style="color:red">*</span>
+                @Html.EditorFor(model => model.Office_Number, new { htmlAttributes = new { @class = "form-control", placeholder = "3980-1111" } })                
+            </div>
+            <p>@Html.ValidationMessageFor(model => model.Office_Number, "", new { @class = "text-danger" })</p>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Office_Fax, htmlAttributes: new { @class = "control-label col-md-8" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Office_Fax, new { htmlAttributes = new { @class = "form-control", placeholder = "3980-1111" } })
+                @Html.ValidationMessageFor(model => model.Office_Fax, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <div class="form-inline">
+        <div class="form-group">
+            @Html.LabelFor(model => model.Office_Addr, htmlAttributes: new { @class = "control-label col-md-8" })
+            <div class="col-md-10 input-group">
+                <span class="input-group-addon" style="color:red">*</span>
+                @Html.EditorFor(model => model.Office_Addr, new { htmlAttributes = new { @class = "form-control", style = "width:100%", placeholder = "沖繩縣國頭郡本部町字石川424番地" } })               
+            </div>
+            <p>@Html.ValidationMessageFor(model => model.Office_Addr, "", new { @class = "text-danger" })</p>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Office_Mailbox, htmlAttributes: new { @class = "control-label col-md-8" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Office_Mailbox, new { htmlAttributes = new { @class = "form-control",style ="width:100%", placeholder = "沖繩縣國頭郡本部町字石川424番地" } })
+                @Html.ValidationMessageFor(model => model.Office_Mailbox, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <div class="form-inline">
+        <div class="form-group">
+            @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-8" })
+            <div class="col-md-10">
+                @Html.DropDownList("Status", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+     <p></p>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="確定" class="btn btn-primary" />
+                @Html.ActionLink("取消", "Index", null, htmlAttributes: new { @class = "btn btn-primary" })
+            </div>
+        </div>
+        }

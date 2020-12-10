@@ -1,0 +1,96 @@
+﻿@model jctravel01.Models.ViewModel.NearbyHotelFcai
+
+@{
+    ViewBag.Title = "更改旅館和附近設施";
+}
+@section scripts{
+
+    @if (TempData["Success"] != null)
+    {
+        <script>
+            alert("@TempData["Success"]");
+        </script>
+    }
+}
+
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.CompanyNo)
+    <div class="form-horizontal col-md-offset-1">
+        <h2 class="col-lg-offset-2">更改旅館和附近設施</h2>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Hotel_no, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @*@Html.EditorFor(model => model.scenery.Scenery_no, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })*@
+                @Html.DisplayFor(model => model.Hotel_no)
+                @Html.HiddenFor(model => model.HotelIndex)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.HotelName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @*@Html.EditorFor(model => model.scenery.Cname, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })*@
+                @Html.DisplayFor(model => model.HotelName)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Nearby.FirstOrDefault().NearbyFaci_no, "附近設施", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @*@Html.ListBoxFor(model => model.Theme_index, Model.themeList, htmlAttributes: new { @class = "form-control" })*@
+                @foreach (var item in Model.NearbyList)
+                {
+                    if (item.Selected)
+                    {
+                        <label class="checkbox-inline"><input type="checkbox" name="NearbyFaci_no" value="@item.Value" checked />@item.Text</label>
+                    }
+                    else
+                    {
+                        <label class="checkbox-inline"><input type="checkbox" name="NearbyFaci_no" value="@item.Value" />@item.Text</label>
+                    }
+                }
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.HotelFaci.FirstOrDefault().HotelFaci_no, "房內設施代碼", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @*@Html.ListBoxFor(model => model.Type_index, selectList: Model.typeList, htmlAttributes: new { @class = "form-control" })*@
+                @foreach (var item in Model.HotelFaciList)
+                {
+                    if (item.Selected)
+                    {
+                        <label class="checkbox-inline"><input type="checkbox" name="HotelFaci_no" value="@item.Value" checked />@item.Text</label>
+                    }
+                    else
+                    {
+                        <label class="checkbox-inline"><input type="checkbox" name="HotelFaci_no" value="@item.Value" />@item.Text</label>
+                    }
+                }
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="確定" class="btn btn-info" />|               
+                @Html.ActionLink("取消", "Index", null, htmlAttributes: new { @class = "btn btn-primary" })
+            </div>
+        </div>
+        <div class="panel panel-default col-md-offset-2 col-md-7">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    其他選項
+                </h3>
+            </div>
+            <div class="panel-body">
+                @Html.ActionLink("型態與主題", "AddTypeTheme", new { id = Model.HotelIndex }, htmlAttributes: new { @class = "btn btn-primary" })|
+                @Html.ActionLink("服務與房內設備", "AddSerFaci", new { id = Model.HotelIndex }, htmlAttributes: new { @class = "btn btn-success" })|
+                @Html.ActionLink("房型與外觀", "AddRoomTypeOutLook", new { id = Model.HotelIndex }, htmlAttributes: new { @class = "btn btn-info" })|
+                @Html.ActionLink("上傳圖片", "UploadImages", new { id = Model.HotelIndex }, htmlAttributes: new { @class = "btn btn-success" })
+            </div>
+        </div>
+
+    </div>
+
+}

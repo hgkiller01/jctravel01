@@ -1,0 +1,203 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    <style>
+        .badge{
+            background-color:blue;
+        }
+    </style>
+    @Scripts.Render("~/bundles/modernizr")
+    @RenderSection("styles",false)
+    <link href="~/Content/dropDwon.css" rel="stylesheet" />
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("ERP系統", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("首頁", "Index", "Home")</li>
+                    <li>@Html.ActionLink("關於", "About", "Home")</li>
+                    <li>@Html.ActionLink("連絡方式", "Contact", "Home")</li>
+                </ul>
+                <div style="padding-top:8px" class="btn-group">
+                    <button class="btn dropdown-toggle btn-primary" data-toggle="dropdown" aria-expanded="false">
+                        旅遊元件庫
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu multi-level" role="menu">
+                        @if (Session["POI101"] != null)
+                        {
+                            <li>@Html.ActionLink("國家", "", new { controller = "Country" }, htmlAttributes: new { id = "CountryCount" })</li>
+                        }
+                        @if (Session["POI102"] != null)
+                        {
+                            <li>@Html.ActionLink("州/省", "", new { controller = "State" }, htmlAttributes: new { id = "StateCount" })</li>
+                        }
+                        @if (Session["POI103"] != null)
+                        {
+                            <li class="dropdown-submenu">
+                                @Html.ActionLink("城市", "", new { controller = "City" }, htmlAttributes: new { tabindex = "-1", id = "CityCount" })
+                                @if (Session["POI104"] != null)
+                                {
+                                    <ul class="dropdown-menu">
+                                        <li>@Html.ActionLink("城市區域", "", new { controller = "CityDistricts" }, htmlAttributes: new { id = "CityAreaCount" })</li>
+                                    </ul>
+                                }
+                            </li>
+                        }
+                        @if (Session["POI105"] != null)
+                        {
+                            <li class="dropdown-submenu">
+                                @Html.ActionLink("航空公司", "", new { controller = "Airlines" }, htmlAttributes: new { tabindex = "-1", id = "AirlinesCount" })
+                                @if (Session["POI112"] != null)
+                                {
+                                    <ul class="dropdown-menu">
+                                        <li>@Html.ActionLink("航空公司辦事處", "", new { controller = "AirlineOffices" }, htmlAttributes: new { id = "AirlineOfficeCount" })</li>
+                                    </ul>
+                                }
+                            </li>
+                        }
+                        @if (Session["POI108"] != null)
+                        {
+                            <li>@Html.ActionLink("景點", "", new { controller = "Sceneries" }, htmlAttributes: new { id = "ViewPointCount" })</li>
+                        }
+                        @if (Session["POI106"] != null)
+                        {
+                            <li class="dropdown-submenu">
+                                @Html.ActionLink("旅館", "", new { controller = "Hotels" }, htmlAttributes: new { tabindex = "-1", id = "HotelsCount" })
+                                <ul class="dropdown-menu">
+                                    <li>@Html.ActionLink("旅館設施", "", new { controller = "HotelFaci_index" }, htmlAttributes: new { id = "HotelFaciCount" })</li>
+                                    <li>@Html.ActionLink("旅館服務", "", new { controller = "HotelSer_index" }, htmlAttributes: new { id = "HotelSerCount" })</li>
+                                    <li>@Html.ActionLink("附近設施", "", new { controller = "NearbyFcai_index" }, htmlAttributes: new { id = "NearbyFcaiCount" })</li>
+                                    <li>@Html.ActionLink("房內設備", "", new { controller = "RoomFaci_index" }, htmlAttributes: new { id = "RoomFaciCount" })</li>
+                                    <li>@Html.ActionLink("房型", "", new { controller = "RoomType_index" }, htmlAttributes: new { id = "RoomCount" })</li>
+                                    <li>@Html.ActionLink("外觀", "", new { controller = "OutLook_index" }, htmlAttributes: new { id = "OutLookCount" })</li>
+                                </ul>
+                            </li>
+                        }
+                        @if (Session["POI107"] != null)
+                        {
+                            <li class="dropdown-submenu">
+                                @Html.ActionLink("餐廳", "", new { controller = "Restaurants" }, htmlAttributes: new { tabindex = "-1", id = "RestCount" })
+                                <ul class="dropdown-menu">
+                                    <li>@Html.ActionLink("餐食方式", "", new { controller = "DiningStyIndex" }, htmlAttributes: new { id = "DiningCount" })</li>
+                                    <li>@Html.ActionLink("氣氛", "", new { controller = "AmosphIndex" }, htmlAttributes: new { id = "AmosCount" })</li>
+                                </ul>
+                            </li>
+                        }
+                        @if (Session["POI109"] != null)
+                        {
+                            <li>@Html.ActionLink("官方旅遊局", "", new { controller = "TourBures" }, htmlAttributes: new { id = "TourBuresCount" })</li>
+                        }
+                        @if (Session["POI110"] != null)
+                        {
+                            <li>@Html.ActionLink("機場", "", new { controller = "AirportInfoes" }, htmlAttributes: new { id = "AirportCount" })</li>
+                        }
+                        @if (Session["POI113"] != null)
+                        {
+                            <li class="dropdown-submenu">
+                                @Html.ActionLink("大線別", "", new { Controller = "UpDivisions" }, htmlAttributes: new { tabindex = "-1", id = "UpDivisCount" })
+                                <ul class="dropdown-menu">
+                                    <li>@Html.ActionLink("小線別", "", new { controller = "Divisions" }, htmlAttributes: new { id = "DivisCount" })</li>
+                                </ul>
+                            </li>
+                        }
+                        @if (Session["POI107"] != null || Session["POI106"] != null || Session["POI108"] != null)
+                        {
+                            <li>@Html.ActionLink("主題", "", new { controller = "Theme_index" }, htmlAttributes: new { id = "ThemeCount" })</li>
+                            <li>@Html.ActionLink("型態", "", new { controller = "Type_index" }, htmlAttributes: new { id = "TypeCount" })</li>
+                        }
+                        @if (Session["POI111"] != null)
+                        {
+                            <li>@Html.ActionLink("圖片管理", "", "Imgs")</li>
+                        }
+                        
+                    </ul>
+
+
+                 
+                </div>
+                <div style="padding-top:8px" class="btn-group">
+                    <button class="btn dropdown-toggle btn-primary" data-toggle="dropdown" aria-expanded="false">
+                        人員管理
+                        <span class="caret"></span>
+                    </button>
+                        <ul class="dropdown-menu multi-level" role="menu">
+                            <li>@Html.ActionLink("公司", "", "Conpanys")</li>
+                            <li>@Html.ActionLink("部門", "", "DepIndexes")</li>
+                            <li>@Html.ActionLink("職等", "", "JobLevel")</li>
+                            <li>@Html.ActionLink("群組", "", "JobGroup")</li>
+                            <li>@Html.ActionLink("人員", "", "HRInfoes")</li>
+                        </ul>
+                </div>
+                <div style="padding-top:8px" class="btn-group">
+                    <button class="btn dropdown-toggle btn-primary" data-toggle="dropdown" aria-expanded="false">
+                        權限管理
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu multi-level" role="menu">
+                        <li>@Html.ActionLink("權限群組", "", "PermiGruops")</li>
+                        <li>@Html.ActionLink("權限設定","","PermiMng")</li>
+                    </ul>
+                </div>
+                    @Html.Partial("_LoginPartial")
+                </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        <div class="row">
+            @RenderBody()
+        </div>
+        
+        <hr />
+        <footer>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/jqajax")
+    <script>
+        $.get('@Url.Action("GetCount","Home")', function (data) {
+            $("#CountryCount").append('<span class="badge">' + data.CountryCount + '</span>');
+            $('#StateCount').append('<span class="badge">' + data.StateCount + '</span>');
+            $('#CityCount').append('<span class="badge">' + data.CityCount + '</span>');
+            $('#AirlinesCount').append('<span class="badge">' + data.AirLineInfoCount + '</span>');
+            $('#HotelsCount').append('<span class="badge">' + data.HotelCount + '</span>');
+            $('#RestCount').append('<span class="badge">' + data.RestCount + '</span>');
+            $('#TourBuresCount').append('<span class="badge">' + data.TourbCount + '</span>');
+            $('#AirportCount').append('<span class="badge">' + data.AirPortCount + '</span>');
+            $('#CityAreaCount').append('<span class="badge">' + data.CityAreaCount + '</span>');
+            $('#TypeCount').append('<span class="badge">' + data.TypeCount + '</span>');
+            $('#ThemeCount').append('<span class="badge">' + data.ThemeCout + '</span>');
+            $('#UpDivisCount').append('<span class="badge">' + data.UpDivisCount + '</span>');
+            $('#DivisCount').append('<span class="badge">' + data.DivisCount + '</span>');
+            $('#ViewPointCount').append('<span class="badge">' + data.ViewPointCount + '</span>');
+            $('#AirlineOfficeCount').append('<span class="badge">' + data.AirLineOfficeCount + '</span>');
+            $('#HotelFaciCount').append('<span class="badge">' + data.HotelFaciCount + '</span>');
+            $('#HotelSerCount').append('<span class="badge">' + data.HotelSerCount + '</span>');
+            $('#NearbyFcaiCount').append('<span class="badge">' + data.HotelNearbyCount + '</span>');
+            $('#RoomFaciCount').append('<span class="badge">' + data.HotelRoomFaciCount + '</span>');
+            $('#RoomCount').append('<span class="badge">' + data.HotelRoomCount + '</span>');
+            $('#OutLookCount').append('<span class="badge">' + data.HotelOutLookCount + '</span>');
+            $('#DiningCount').append('<span class="badge">' + data.RestDinngCount + '</span>');
+            $('#AmosCount').append('<span class="badge">' + data.ResAmosCount + '</span>');
+        })
+    </script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

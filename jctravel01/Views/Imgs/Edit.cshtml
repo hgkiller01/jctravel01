@@ -1,0 +1,132 @@
+﻿@model jctravel01.Models.Img
+
+@{
+    ViewBag.Title = "編輯圖片";
+}
+
+<h2>編輯圖片</h2>
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>資料如下</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ImgIndex)
+        @Html.HiddenFor(model => model.CompanyNo)
+        @Html.HiddenFor(model => model.Scenery_index)
+        @Html.HiddenFor(model => model.RestIndex)
+        @Html.HiddenFor(model => model.HotelIndex)
+        @Html.HiddenFor(model => model.POI_Type)
+        @Html.HiddenFor(model => model.ImgPath)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.POI_Type, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @if (Model.POI_Type == 1)
+                {
+                    <b>景點</b>
+                }
+                else if (Model.POI_Type == 2)
+                {
+                    <b>餐廳</b>
+                }
+                else if (Model.POI_Type == 3)
+                {
+                    <b>旅館</b>
+                }
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">元件名稱</label>
+            <div class="col-md-10">
+                <b>@ViewBag.PoiName</b>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ImgPath, "元件圖片", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <img style="width:20%;height:20%;" src="@Url.Content("~"+Model.ImgPath)" />
+                <div class="input-group">                   
+                </div>        
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">更換圖片</label>
+            <div class="col-md-10">
+                <input type="file" name="imageUpload" id="imageUpload" accept="image/*" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ImgInfo, htmlAttributes: new { @class = "control-label col-md-2",placeholder="飯店大廳" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ImgInfo, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ImgInfo, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.OrderNo, htmlAttributes: new { @class = "control-label col-md-2",placeholder="1到255" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.OrderNo, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.OrderNo, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("Status", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CreateBy, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DisplayFor(model => model.CreateBy)
+                @Html.HiddenFor(model => model.CreateBy)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CreateBy_Time, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DisplayFor(model => model.CreateBy_Time)
+                @Html.HiddenFor(model => model.CreateBy_Time)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.UpdateBy, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DisplayFor(model => model.UpdateBy)
+                @Html.HiddenFor(model => model.UpdateBy)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.UpdateBy_Time, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DisplayFor(model => model.UpdateBy_Time)
+                @Html.HiddenFor(model => model.UpdateBy_Time)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="確定" class="btn btn-primary" />
+                @Html.ActionLink("取消", "Index", null, htmlAttributes: new { @class = "btn btn-success" })
+            </div>
+        </div>
+    </div>
+}
+

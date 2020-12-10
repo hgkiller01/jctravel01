@@ -1,0 +1,2 @@
+﻿@model SelectList
+<select class="form-control" id="Search" name="Search">@foreach (var item in Model){if (item.Selected){<option value="@item.Value" selected>@item.Text</option> }else{<option value="@item.Value">@item.Text</option>}}</select>

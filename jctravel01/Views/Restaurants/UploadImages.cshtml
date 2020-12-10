@@ -1,0 +1,68 @@
+﻿@model jctravel01.Models.ViewModel.Sc_UploadImage
+
+@{
+    ViewBag.Title = "上傳餐廳圖片";
+}
+@section scripts{
+    <script>
+        var count = 0;
+        $("#addUpload").click(function () {
+            if (count < 5) {
+                $("#upload tr").last().after('<tr><td><span style="color:red">*</span>圖片說明： @Html.Editor("imgInfo", new { @class = "form-control" })' +
+                    '</td> <td><input type="file" name="imageUpload" accept="image/*"/></td></tr>')
+                count++;
+            }
+            return false;
+        })
+        @if(ViewBag.success != null)
+        {
+            @:alert('@ViewBag.success');
+        }
+    </script>
+}
+<div class="col-md-offset-2">
+    <h2>上傳餐廳圖片</h2>
+    <h4>餐廳代碼：@Html.DisplayFor(model => model.rest_no)</h4>
+    <h4>餐廳名稱：@Html.DisplayFor(model => model.cname)</h4>
+    @using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.restIndex)
+        @Html.HiddenFor(model => model.rest_no)
+        @Html.HiddenFor(model => model.cname)
+        <table id="upload">
+            <tr>
+                <td>
+                    <span style="color:red">*</span>圖片說明： @Html.Editor("imgInfo", new { @class = "form-control" })
+                    @*@Html.ValidationMessageFor(model => model.imgInfo, "", new { @class = "text-danger" })*@
+                </td>
+                <td>
+                    <input type="file" name="imageUpload" id="imageUpload" accept="image/*" />
+                    @*@Html.ValidationMessageFor(model => model.imageUpload, "", new { @class = "text-danger" })*@
+                </td>
+            </tr>
+        </table>
+        @Html.ValidationSummary("", htmlAttributes: new { @class = "text-danger" })
+        <div class="" style="padding-bottom:15px;">
+            <button id="addUpload" class="btn btn-default">增加上傳圖片</button>
+        </div>
+        <div class="" style="padding-bottom:15px;">
+            <input type="submit" value="確定" class="btn btn-info" />|
+            @Html.ActionLink("取消", "Index", null, htmlAttributes: new { @class = "btn btn-primary" })
+        </div>
+
+        <div class="panel panel-default col-md-5">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    其他選項
+                </h3>
+            </div>
+            <div class="panel-body">
+                @Html.ActionLink("更改餐食方式與氣氛", "AddDiningAmos", new { id = Model.restIndex }, htmlAttributes: new { @class = "btn btn-primary" })
+                @Html.ActionLink("修改型態和主題", "AddTypeTheme", new { id = Model.restIndex }, htmlAttributes: new { @class = "btn btn-info" })
+            </div>
+        </div>
+
+
+    }
+</div>

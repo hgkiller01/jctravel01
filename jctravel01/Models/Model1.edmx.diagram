@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="f7ac1dd105a743fba3e986040fa2e6b2" Name="Diagram1" ZoomLevel="47">
+        <EntityTypeShape EntityType="Travel02Model.HRInfo" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Travel02Model.Airline" Width="1.5" PointX="10.875" PointY="38.625" />
+        <EntityTypeShape EntityType="Travel02Model.AirlineOffice" Width="1.5" PointX="13.125" PointY="43.625" />
+        <EntityTypeShape EntityType="Travel02Model.AirportInfo" Width="1.5" PointX="10.125" PointY="44.125" />
+        <EntityTypeShape EntityType="Travel02Model.AmosphIndex" Width="1.5" PointX="28.875" PointY="42.25" />
+        <EntityTypeShape EntityType="Travel02Model.Authorze_index" Width="1.5" PointX="5.25" PointY="12" />
+        <EntityTypeShape EntityType="Travel02Model.City03" Width="1.5" PointX="12.375" PointY="50.5" />
+        <EntityTypeShape EntityType="Travel02Model.CityDistrict" Width="1.5" PointX="14.625" PointY="57.5" />
+        <EntityTypeShape EntityType="Travel02Model.CoIndex" Width="1.5" PointX="0.75" PointY="2.625" />
+        <EntityTypeShape EntityType="Travel02Model.Country_City_index" Width="1.5" PointX="7.625" PointY="0.75" />
+        <EntityTypeShape EntityType="Travel02Model.Country01" Width="1.5" PointX="7.875" PointY="42.5" />
+        <EntityTypeShape EntityType="Travel02Model.DepIndex" Width="1.5" PointX="3" PointY="23.875" />
+        <EntityTypeShape EntityType="Travel02Model.DiningStyIndex" Width="1.5" PointX="28.875" PointY="60.25" />
+        <EntityTypeShape EntityType="Travel02Model.Division" Width="1.5" PointX="7.875" PointY="50.125" />
+        <EntityTypeShape EntityType="Travel02Model.Hotel" Width="1.5" PointX="19.875" PointY="46.75" />
+        <EntityTypeShape EntityType="Travel02Model.Hotel_Theme" Width="1.5" PointX="22.125" PointY="42.375" />
+        <EntityTypeShape EntityType="Travel02Model.Hotel_Type" Width="1.5" PointX="25.125" PointY="50.375" />
+        <EntityTypeShape EntityType="Travel02Model.HotelFaci_index" Width="1.5" PointX="19.875" PointY="62.25" />
+        <EntityTypeShape EntityType="Travel02Model.HotelFacility" Width="1.5" PointX="22.125" PointY="58.375" />
+        <EntityTypeShape EntityType="Travel02Model.HotelOutLook" Width="1.5" PointX="28.125" PointY="50.375" />
+        <EntityTypeShape EntityType="Travel02Model.HotelSer_index" Width="1.5" PointX="25.875" PointY="38.25" />
+        <EntityTypeShape EntityType="Travel02Model.HotelService" Width="1.5" PointX="28.125" PointY="46.375" />
+        <EntityTypeShape EntityType="Travel02Model.Img" Width="1.5" PointX="28.125" PointY="54.875" />
+        <EntityTypeShape EntityType="Travel02Model.JobGruopIndex" Width="1.5" PointX="3" PointY="20.125" />
+        <EntityTypeShape EntityType="Travel02Model.JobLevelIndex" Width="1.5" PointX="3" PointY="16.5" />
+        <EntityTypeShape EntityType="Travel02Model.logInLog" Width="1.5" PointX="7.625" PointY="4.75" />
+        <EntityTypeShape EntityType="Travel02Model.NearbyFacility" Width="1.5" PointX="25.125" PointY="46.375" />
+        <EntityTypeShape EntityType="Travel02Model.NearbyFcai_index" Width="1.5" PointX="22.875" PointY="33.25" />
+        <EntityTypeShape EntityType="Travel02Model.OutLook_index" Width="1.5" PointX="25.875" PointY="62.25" />
+        <EntityTypeShape EntityType="Travel02Model.PasMng" Width="1.5" PointX="5.25" PointY="3.125" />
+        <EntityTypeShape EntityType="Travel02Model.PermiGruop" Width="1.5" PointX="3" PointY="10" />
+        <EntityTypeShape EntityType="Travel02Model.PermiIndex" Width="1.5" PointX="3" PointY="28.125" />
+        <EntityTypeShape EntityType="Travel02Model.PermiMng" Width="1.5" PointX="5.25" PointY="7.375" />
+        <EntityTypeShape EntityType="Travel02Model.Res_Theme" Width="1.5" PointX="25.125" PointY="58.375" />
+        <EntityTypeShape EntityType="Travel02Model.Res_Type" Width="1.5" PointX="31.125" PointY="50.375" />
+        <EntityTypeShape EntityType="Travel02Model.ResAmos" Width="1.5" PointX="31.125" PointY="46.375" />
+        <EntityTypeShape EntityType="Travel02Model.ResDining" Width="1.5" PointX="31.125" PointY="54.375" />
+        <EntityTypeShape EntityType="Travel02Model.Restaurant" Width="1.5" PointX="22.875" PointY="47" />
+        <EntityTypeShape EntityType="Travel02Model.RoomFaci_index" Width="1.5" PointX="22.875" PointY="68.25" />
+        <EntityTypeShape EntityType="Travel02Model.RoomFacility" Width="1.5" PointX="25.125" PointY="54.375" />
+        <EntityTypeShape EntityType="Travel02Model.RoomType" Width="1.5" PointX="25.125" PointY="42.375" />
+        <EntityTypeShape EntityType="Travel02Model.RoomType_index" Width="1.5" PointX="22.875" PointY="38.25" />
+        <EntityTypeShape EntityType="Travel02Model.Scenery" Width="1.5" PointX="16.875" PointY="47.125" />
+        <EntityTypeShape EntityType="Travel02Model.Scenery_Theme" Width="1.5" PointX="19.125" PointY="42.375" />
+        <EntityTypeShape EntityType="Travel02Model.Scenery_Type" Width="1.5" PointX="19.125" PointY="58.375" />
+        <EntityTypeShape EntityType="Travel02Model.State02" Width="1.5" PointX="10.125" PointY="60.875" />
+        <EntityTypeShape EntityType="Travel02Model.Theme_index" Width="1.5" PointX="19.875" PointY="37.125" />
+        <EntityTypeShape EntityType="Travel02Model.TourBure" Width="1.5" PointX="14.625" PointY="51.125" />
+        <EntityTypeShape EntityType="Travel02Model.Type_index" Width="1.5" PointX="22.875" PointY="63.125" />
+        <EntityTypeShape EntityType="Travel02Model.UpDivision" Width="1.5" PointX="5.625" PointY="46.25" />
+        <AssociationConnector Association="Travel02Model.FK_AirlineOffice_Airline" />
+        <AssociationConnector Association="Travel02Model.FK_AirlineOffice_City03" />
+        <AssociationConnector Association="Travel02Model.FK_AirlineOffice_Country01" />
+        <AssociationConnector Association="Travel02Model.FK_AirportInfo_City03" />
+        <AssociationConnector Association="Travel02Model.FK_AirportInfo_Country01" />
+        <AssociationConnector Association="Travel02Model.FK_ResAmos_AmosphIndex" />
+        <AssociationConnector Association="Travel02Model.FK_Authorze_index_PermiGruop" />
+        <AssociationConnector Association="Travel02Model.FK_Authorze_index_PermiIndex1" />
+        <AssociationConnector Association="Travel02Model.FK_City03_Country01" />
+        <AssociationConnector Association="Travel02Model.FK_City03_State02" />
+        <AssociationConnector Association="Travel02Model.FK_CityDistrict_City03" />
+        <AssociationConnector Association="Travel02Model.FK_Hotel_City03" />
+        <AssociationConnector Association="Travel02Model.FK_Restaurant_City03" />
+        <AssociationConnector Association="Travel02Model.FK_Scenery_City03" />
+        <AssociationConnector Association="Travel02Model.FK_TourBure_City03" />
+        <AssociationConnector Association="Travel02Model.FK_Hotel_CityDistrict" />
+        <AssociationConnector Association="Travel02Model.FK_Restaurant_CityDistrict" />
+        <AssociationConnector Association="Travel02Model.FK_Scenery_CityDistrict" />
+        <AssociationConnector Association="Travel02Model.FK_HRInfo_CoIndex" />
+        <AssociationConnector Association="Travel02Model.FK_PasMng_CoIndex" />
+        <AssociationConnector Association="Travel02Model.FK_PermiGruop_CoIndex" />
+        <AssociationConnector Association="Travel02Model.FK_PermiMng_CoIndex" />
+        <AssociationConnector Association="Travel02Model.FK_Country01_UpDivision" />
+        <AssociationConnector Association="Travel02Model.FK_Hotel_Country01" />
+        <AssociationConnector Association="Travel02Model.FK_Restaurant_Country01" />
+        <AssociationConnector Association="Travel02Model.FK_Scenery_Country01" />
+        <AssociationConnector Association="Travel02Model.FK_State02_Country01" />
+        <AssociationConnector Association="Travel02Model.FK_TourBure_Country01" />
+        <AssociationConnector Association="Travel02Model.FK_HRInfo_DepIndex" />
+        <AssociationConnector Association="Travel02Model.FK_ResDining_DiningStyIndex" />
+        <AssociationConnector Association="Travel02Model.FK_Division_UpDivision" />
+        <AssociationConnector Association="Travel02Model.FK_Hotel_Theme_Hotel" />
+        <AssociationConnector Association="Travel02Model.FK_Hotel_Type_Hotel" />
+        <AssociationConnector Association="Travel02Model.FK_HotelFacility_Hotel" />
+        <AssociationConnector Association="Travel02Model.FK_HotelOutLook_Hotel" />
+        <AssociationConnector Association="Travel02Model.FK_HotelService_Hotel" />
+        <AssociationConnector Association="Travel02Model.FK_Img_Hotel" />
+        <AssociationConnector Association="Travel02Model.FK_NearbyFacility_Hotel" />
+        <AssociationConnector Association="Travel02Model.FK_RoomFacility_Hotel" />
+        <AssociationConnector Association="Travel02Model.FK_RoomType_Hotel" />
+        <AssociationConnector Association="Travel02Model.FK_Hotel_Theme_Theme_index" />
+        <AssociationConnector Association="Travel02Model.FK_Hotel_Type_Type_index" />
+        <AssociationConnector Association="Travel02Model.FK_HotelFacility_HotelFaci_index" />
+        <AssociationConnector Association="Travel02Model.FK_HotelOutLook_OutLook_index" />
+        <AssociationConnector Association="Travel02Model.FK_HotelService_HotelSer_index" />
+        <AssociationConnector Association="Travel02Model.FK_HRInfo_JobGruopIndex" />
+        <AssociationConnector Association="Travel02Model.FK_HRInfo_JobLevelIndex" />
+        <AssociationConnector Association="Travel02Model.FK_PasMng_HRInfo" />
+        <AssociationConnector Association="Travel02Model.FK_PermiMng_HRInfo" />
+        <AssociationConnector Association="Travel02Model.FK_Img_Restaurant" />
+        <AssociationConnector Association="Travel02Model.FK_Img_Scenery" />
+        <AssociationConnector Association="Travel02Model.FK_NearbyFacility_NearbyFcai_index" />
+        <AssociationConnector Association="Travel02Model.FK_PermiMng_PermiGruop" />
+        <AssociationConnector Association="Travel02Model.FK_Res_Theme_Restaurant" />
+        <AssociationConnector Association="Travel02Model.FK_Res_Theme_Theme_index" />
+        <AssociationConnector Association="Travel02Model.FK_Res_Type_Restaurant" />
+        <AssociationConnector Association="Travel02Model.FK_Res_Type_Type_index" />
+        <AssociationConnector Association="Travel02Model.FK_ResAmos_Restaurant" />
+        <AssociationConnector Association="Travel02Model.FK_ResDining_Restaurant" />
+        <AssociationConnector Association="Travel02Model.FK_RoomFacility_RoomFaci_index" />
+        <AssociationConnector Association="Travel02Model.FK_RoomType_RoomType_index" />
+        <AssociationConnector Association="Travel02Model.FK_Scenery_Theme_Scenery" />
+        <AssociationConnector Association="Travel02Model.FK_Scenery_Type_Scenery" />
+        <AssociationConnector Association="Travel02Model.FK_Scenery_Theme_Theme_index" />
+        <AssociationConnector Association="Travel02Model.FK_Scenery_Type_Type_index" />
+        <AssociationConnector Association="Travel02Model.FK_TourBure_State02" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,152 @@
+﻿@model IPagedList<jctravel01.Models.Img>
+
+@{
+    ViewBag.Title = "圖片管理";
+}
+
+<h2>圖片管理</h2>
+@section styles{
+    <link rel="stylesheet" href="~/Content/PagedList.css" />
+    <style>
+        th, td {
+            white-space: nowrap;
+        }
+    </style>
+}
+@section scripts{
+    <script>
+        $("#reset").click(function () {
+            $(".form-control").val("");
+            return false;
+        })
+    </script>
+}
+@{
+    int colorNum = 1;
+    string color = "antiquewhite"; @*設定表格顏色*@
+    string trColor = "";
+    int RowsCountMin = ViewBag.RowCountMin;
+}
+@using (Html.BeginForm())
+{
+    <fieldset>
+        <legend>快速查詢</legend>
+        <div class="form-inline col-lg-offset-3">
+            <div class="form-group">
+                @Html.DropDownList("Poi_Type", ViewBag.POI_TypeNum as SelectList, "請選擇", htmlAttributes: new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                @Html.DropDownList("imgSearch", ViewBag.imgSearchNum as SelectList, "請選擇", htmlAttributes: new { @class = "form-control" })
+            </div>
+            <div class="input-group">
+                @Html.Editor("Search", new { htmlAttributes = new { @class = "form-control",placeholder="請至少選擇一個條件" } })
+                <span class="input-group-btn">
+                <input type="submit" class="btn btn-success" value="送出查詢" />
+                <a id="reset" href="#" class="btn btn-warning">清空</a>  
+                <input type="hidden" name="Page" value="1" />
+                </span>
+            </div>
+        </div>
+        @*<p style="padding-top:20px"></p>
+
+        <div class="form-inline col-md-offset-5" style="margin-top:20px">
+            <div class="form-group">
+                              
+            </div>
+        </div>*@
+    </fieldset>
+}
+@*<p>
+    @Html.ActionLink("Create New", "Create")
+</p>*@
+<table class="table">
+    <tr style="background-color:@color">
+        <th>
+            元件代號
+        </th>
+        <th>
+            元件名稱
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().POI_Type)
+        </th>
+        <th>
+            圖片張數
+        </th>
+    </tr>
+
+@foreach (var item in Model)
+{
+    if (colorNum % 2 != 0)
+    {
+        color = "#b8f1f3";
+    }
+    else
+    {
+        color = "antiquewhite";
+    }
+    if (item.Status == 1)
+    {
+        trColor = "blueviolet";
+    }
+    else
+    {
+        trColor = "dimgray";
+    }
+    colorNum++;
+    //var nowScenery = item.Scenery.Scenery_no;
+    <tr style="background-color:@color;color:@trColor;">
+
+        @if (item.POI_Type == 1)
+        {
+            <td>
+                @Html.ActionLink(item.Scenery.Scenery_no, "PictureList", new { id = item.Scenery_index, poi_type = item.POI_Type }, htmlAttributes: new { @class = "btn btn-primary" })
+            </td>
+            <td>
+                @Html.DisplayFor(modeliteim => item.Scenery.Cname)
+            </td>
+            <td>
+                景點
+            </td>
+            <td>
+                @item.Scenery.Img.Count()
+            </td>
+        }
+        else if (item.POI_Type == 2)
+        {
+            <td>
+                @Html.ActionLink(item.Restaurant.Rest_no, "PictureList", new { id = item.RestIndex, poi_type = item.POI_Type }, htmlAttributes: new { @class = "btn btn-primary" })
+            </td>
+            <td>
+                @Html.DisplayFor(modeliteim => item.Restaurant.Cname)
+            </td>
+            <td>
+                餐廳
+            </td>
+            <td>
+                @item.Restaurant.Img.Count()
+            </td>
+        }
+        else if (item.POI_Type == 3)
+        {
+            <td>
+                @Html.ActionLink(item.Hotel.Holtel_no, "PictureList", new { id = item.HotelIndex, poi_type = item.POI_Type }, htmlAttributes: new { @class = "btn btn-primary" })
+            </td>
+            <td>
+                @Html.DisplayFor(modeliteim => item.Hotel.Cname)
+            </td>
+            <td>
+                旅館
+            </td>
+            <td>
+                @item.Hotel.Img.Count()
+           </td>
+        }
+    </tr>
+}
+
+</table>
+<h5 style="margin:0 auto; width:10%; color:blue;">共 @ViewBag.DataCount 筆資料</h5>
+<div class="pager">
+    @Html.PagedListPager(Model, Page => Url.Action("Index", new { Page, ViewBag.Search, ViewBag.Poi_Type, ViewBag.imgSearch }))
+</div>

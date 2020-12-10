@@ -1,0 +1,98 @@
+﻿@model jctravel01.Models.CoIndex
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>CoIndex</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ComName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ComName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TaxID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TaxID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ContactPhone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ContactPhone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ContactName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ContactName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Co_addres)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Co_addres)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CoIP)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CoIP)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreateBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreateBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreateBy_Time)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreateBy_Time)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UpdateBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UpdateBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UpdateBy_Time)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UpdateBy_Time)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.CompanyNo }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

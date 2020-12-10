@@ -1,0 +1,178 @@
+﻿@model jctravel01.Models.Country01
+
+@{
+    ViewBag.Title = "國家詳細資料";
+}
+@section styles{
+    <style>
+        dd {
+            background-color:aquamarine;
+        }
+        dt{
+            background-color:ActiveCaption;
+        }
+    </style>
+}
+<h2>詳細資料</h2>
+
+<div style="width:30%;">
+    <h4>國家詳細資料</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Country_no)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Country_no)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ShortName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ShortName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ename)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ename)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Continent)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Continent)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PDivisionIndex)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UpDivision.Cname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tele_CountryCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tele_CountryCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tele_DialCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tele_DialCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Voltage)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Voltage)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Frequency)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Frequency)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Plugcode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Plugcode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Currency_code)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Currency_code)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tax)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tax)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+
+        <dd>
+            @ViewBag.ShowStuatus
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Order)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Order)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreateBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreateBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreateBy_Time)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreateBy_Time)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UpdateBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UpdateBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UpdateBy_Time)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UpdateBy_Time)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("編輯此筆資料", "Edit", new { id = Model.Country_no }, htmlAttributes: new { @class = "btn btn-primary" }) |
+    @Html.ActionLink("回到列表", "Index", null, htmlAttributes: new { @class = "btn btn-success" })
+</p>

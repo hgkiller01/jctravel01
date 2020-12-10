@@ -1,0 +1,122 @@
+﻿@model jctravel01.Models.AirportInfo
+
+@{
+    ViewBag.Title = "新增機場";
+}
+@section scripts{
+  <script>
+
+      $(function () {
+          $("#CountryIndex").change(function () {
+              var selectedValue = $('#CountryIndex option:selected').val();
+              if ($.trim(selectedValue).length > 0) {
+                  GetState_no(selectedValue);
+              }
+          })
+      })
+      function GetState_no(CountryIndex) {
+          $.ajax({
+              type: "POST",
+              url: "@Url.Action("GetCity_no")",
+              data: { CountryIndex: CountryIndex },
+              dataType: 'json',
+              success: function (data) {
+                  if (data.length > 0) {
+                      $("#CityIndex").empty();
+                      $.each(data, function (i, item) {
+                          $('#CityIndex').append($('<option></option>').val(item.CityIndex).text(item.City_no + " " + item.Cname));
+                      })
+                  }
+                  else {
+                      $("#CityIndex").empty();
+                      $('#CityIndex').append($('<option></option>').val('').text('------'));
+                  }
+              }
+
+          })
+      }
+
+
+</script>
+
+}
+<h2>新增機場</h2>
+@if (ViewBag.alert != null)
+{
+    <div class="alert alert-danger">
+        <h2>@ViewBag.alert</h2>
+    </div>
+}
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>填取下列資料</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.AirportCode, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10 input-group">
+                <span class="input-group-addon" style="color:red">*</span>
+                @Html.EditorFor(model => model.AirportCode, new { htmlAttributes = new { @class = "form-control", placeholder = "NAA" } })
+                @Html.ValidationMessageFor(model => model.AirportCode, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CountryIndex, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10 input-group">
+                <span class="input-group-addon" style="color:red">*</span>
+                @Html.DropDownList("CountryIndex", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.CountryIndex, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CityIndex, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10 input-group">
+                <span class="input-group-addon" style="color:red">*</span>
+                @Html.DropDownList("CityIndex", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.CityIndex, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ApEName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10 input-group">
+                <span class="input-group-addon" style="color:red">*</span>
+                @Html.EditorFor(model => model.ApEName, new { htmlAttributes = new { @class = "form-control", placeholder = "Narita Airport" } })
+                @Html.ValidationMessageFor(model => model.ApEName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ApCname, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10 input-group">
+                <span class="input-group-addon" style="color:red">*</span>
+                @Html.EditorFor(model => model.ApCname, new { htmlAttributes = new { @class = "form-control", placeholder = "成田國際機場" } })
+                @Html.ValidationMessageFor(model => model.ApCname, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10 input-group">
+                <span class="input-group-addon" style="color:red">*</span>
+                @*@Html.EditorFor(model => model.Status, new { htmlAttributes = new { @class = "form-control" } })*@
+                @Html.DropDownList("Status", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="確定" class="btn btn-primary" />|
+                @Html.ActionLink("取消", "Index", null, htmlAttributes: new { @class = "btn btn-primary" })
+            </div>
+        </div>
+    </div>
+}
+

@@ -1,0 +1,404 @@
+﻿@model jctravel01.Models.Scenery
+
+@{
+    ViewBag.Title = "新增景點";
+}
+@section scripts{
+<script src="~/Scripts/jquery.timepicker.js"></script>
+<script src="~/Scripts/jquery.timepicker.min.js"></script>
+    <script>
+   
+        $(function () {
+            $("#CountryIndex").change(function () {
+                var selectedValue = $('#CountryIndex option:selected').val();
+                if ($.trim(selectedValue).length > 0) {
+                    GetState_no(selectedValue);
+                }
+            })
+            $(".timepicker").timepicker({ 'timeFormat': 'H:i:s' });
+            $(".add-on").click(function () {
+                $(this).siblings(".timepicker").timepicker('show');                
+            })
+
+            $("#CityIndex").change(function () {
+                var selectedValue = $('#CityIndex option:selected').val();
+                if ($.trim(selectedValue).length > 0) {
+                    GetCityDistrictCode(selectedValue);
+                }
+                else {
+                    $("#CityDistrictIndex").empty();
+                    $('#CityDistrictIndex').append($('<option></option>').val('').text('請選擇'));
+                }
+            })
+        })
+        function GetState_no(CountryIndex) {
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("GetCity_no")",
+                data: { CountryIndex: CountryIndex },
+                dataType: 'json',
+                success: function (data) {
+                    if (data.length > 0) {
+                        $("#CityIndex").empty();
+                        $.each(data, function (i, item) {
+                            $('#CityIndex').append($('<option></option>').val(item.CityIndex).text(item.City_no+" "+item.Cname));
+                        })
+                        var selectedValue = $('#CityIndex option:selected').val();
+                        if ($.trim(selectedValue).length > 0) {
+                            GetCityDistrictCode(selectedValue);
+                        }
+                    }
+                    else {
+                        $("#CityDistrictIndex").empty();
+                        $('#CityDistrictIndex').append($('<option></option>').val('').text('請選擇'));
+                        $("#CityIndex").empty();
+                        $('#CityIndex').append($('<option></option>').val('').text('請選擇'));
+                    }
+                }
+
+            })
+        }
+        function GetCityDistrictCode(CityIndex) {
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("GetCityDistrictCode")",
+                data: { CityIndex: CityIndex },
+            dataType: 'json',
+            success: function (data) {
+                if (data.length > 0) {
+                    $("#CityDistrictIndex").empty();
+                    $('#CityDistrictIndex').append($('<option></option>').val('').text('請選擇'));
+                    $.each(data, function (i, item) {
+                        $('#CityDistrictIndex').append($('<option></option>').val(item.CityDistrictIndex).text(item.CityDistrictCode + " " + item.DisCname));
+                    })
+                }
+                else {
+                    $("#CityDistrictIndex").empty();
+                    $('#CityDistrictIndex').append($('<option></option>').val('').text('請選擇'));
+                }
+            }
+
+        })
+        }
+
+    </script>
+}
+@section styles{
+<link href="~/Content/jquery.timepicker.css" rel="stylesheet" />
+    <style>
+        h1{
+            float:right;
+        }
+        textarea{
+            width:100%;
+        }
+    </style>
+}
+<h2>新增景點</h2>
+@if (!string.IsNullOrEmpty(@ViewBag.alert))
+{
+    <div class="alert alert-danger">
+        <h3>@ViewBag.alert</h3>
+    </div>
+}
+@using (Html.BeginForm(null, null, FormMethod.Post, htmlAttributes: new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="row">
+        <h4>請填以下資料</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-inline">
+            <div class="form-group col-md-3">
+                @Html.LabelFor(model => model.CountryIndex, "國家代碼", htmlAttributes: new { @class = "control-label col-md-6" })
+                <div class="col-md-10 input-group">
+                    <span class="input-group-addon" style="color:red">*</span>
+                    @Html.DropDownList("CountryIndex", null, htmlAttributes: new { @class = "form-control" })                    
+                </div>
+                <p>@Html.ValidationMessageFor(model => model.CountryIndex, "", new { @class = "text-danger" })</p>
+            </div>
+
+            <div class="form-group col-md-3">
+                @Html.LabelFor(model => model.CityIndex, "城市代碼", htmlAttributes: new { @class = "control-label col-md-6" })
+                <div class="col-md-10 input-group">
+                    <span class="input-group-addon" style="color:red">*</span>
+                    @Html.DropDownList("CityIndex", null, htmlAttributes: new { @class = "form-control" })                  
+                </div>
+                <p>@Html.ValidationMessageFor(model => model.CityIndex, "", new { @class = "text-danger" })</p>
+            </div>
+
+            <div class="form-group col-md-3">
+                @Html.LabelFor(model => model.ShortName, htmlAttributes: new { @class = "control-label col-md-5" })
+                <div class="col-md-10 input-group">
+                    <span class="input-group-addon" style="color:red">*</span>
+                    @Html.EditorFor(model => model.ShortName, new { htmlAttributes = new { @class = "form-control", placeholder = "Ocean Expo Park" } })                    
+                </div>
+                <p>@Html.ValidationMessageFor(model => model.ShortName, "", new { @class = "text-danger" })</p>
+            </div>
+
+            <div class="form-group col-md-3">
+                @Html.LabelFor(model => model.Ename, htmlAttributes: new { @class = "control-label col-md-5" })
+                <div class="col-md-10 input-group">
+                    <span class="input-group-addon" style="color:red">*</span>
+                    @Html.EditorFor(model => model.Ename, new { htmlAttributes = new { @class = "form-control", placeholder = "Fu Restaurant" } })                   
+                </div>
+                <p>@Html.ValidationMessageFor(model => model.Ename, "", new { @class = "text-danger" })</p>
+            </div>
+        </div>
+
+        <div class="form-inline">
+            <div class="form-group col-md-3">
+                @Html.LabelFor(model => model.Cname, htmlAttributes: new { @class = "control-label col-md-5" })
+                <div class="col-md-10 input-group">
+                    <span class="input-group-addon" style="color:red">*</span>
+                    @Html.EditorFor(model => model.Cname, new { htmlAttributes = new { @class = "form-control", placeholder = "沖繩海洋公園" } })                    
+                </div>
+                <p>@Html.ValidationMessageFor(model => model.Cname, "", new { @class = "text-danger" })</p>
+            </div>
+
+            <div class="form-group col-md-3">
+                @Html.LabelFor(model => model.CityDistrictIndex, htmlAttributes: new { @class = "control-label col-md-5" })
+                <div class="col-md-10">
+                    @*@Html.EditorFor(model => model.CityDistrictIndex, new { htmlAttributes = new { @class = "form-control", placeholder = "5" } })*@
+                    @Html.DropDownList("CityDistrictIndex", null, "請選擇", htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.CityDistrictIndex, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group col-md-3">
+                @Html.LabelFor(model => model.Tele_CountryCode, htmlAttributes: new { @class = "control-label col-md-5" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Tele_CountryCode, new { htmlAttributes = new { @class = "form-control", placeholder = "81" } })
+                    @Html.ValidationMessageFor(model => model.Tele_CountryCode, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group col-md-3">
+                @Html.LabelFor(model => model.Tele_Area, htmlAttributes: new { @class = "control-label col-md-5" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Tele_Area, new { htmlAttributes = new { @class = "form-control", placeholder = "3" } })
+                    @Html.ValidationMessageFor(model => model.Tele_Area, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-inline">
+            <div class="form-group col-md-4">
+                @Html.LabelFor(model => model.Tele_number, htmlAttributes: new { @class = "control-label col-md-5" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Tele_number, new { htmlAttributes = new { @class = "form-control", placeholder = "81" } })
+                    @Html.ValidationMessageFor(model => model.Tele_number, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group col-md-4">
+                @Html.LabelFor(model => model.Fax, htmlAttributes: new { @class = "control-label col-md-5" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Fax, new { htmlAttributes = new { @class = "form-control", placeholder = "3980-0011" } })
+                    @Html.ValidationMessageFor(model => model.Fax, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group col-md-4">
+                @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-5" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", placeholder = "test@gmail.com" } })
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-inline">
+            <div class="form-group col-md-3">
+                @Html.LabelFor(model => model.URL, htmlAttributes: new { @class = "control-label col-md-5" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.URL, new { htmlAttributes = new { @class = "form-control", placeholder = "http://test.com.tw" } })
+                    @Html.ValidationMessageFor(model => model.URL, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group col-md-3">
+                @Html.LabelFor(model => model.Blog, htmlAttributes: new { @class = "control-label col-md-5" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Blog, new { htmlAttributes = new { @class = "form-control", placeholder = "http://test.com.tw" } })
+                    @Html.ValidationMessageFor(model => model.Blog, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group col-md-3">
+                @Html.LabelFor(model => model.Longitude, htmlAttributes: new { @class = "control-label col-md-5" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Longitude, new { htmlAttributes = new { @class = "form-control", placeholder = "139.708053" } })
+                    @Html.ValidationMessageFor(model => model.Longitude, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group col-md-3">
+                @Html.LabelFor(model => model.Latitude, htmlAttributes: new { @class = "control-label col-md-5" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Latitude, new { htmlAttributes = new { @class = "form-control", placeholder = "35.728567" } })
+                    @Html.ValidationMessageFor(model => model.Latitude, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-inline">
+
+            <div class="form-group col-md-3">
+                @Html.LabelFor(model => model.Fee, htmlAttributes: new { @class = "control-label col-md-6" })
+                <div class="col-md-12">
+                    @Html.EditorFor(model => model.Fee, new { htmlAttributes = new { @class = "form-control", placeholder = "NYD200" } })
+                    @Html.ValidationMessageFor(model => model.Fee, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group col-md-3">
+                @Html.LabelFor(model => model.Start_time, htmlAttributes: new { @class = "control-label col-md-6" })
+                <div class="col-md-12">
+                    @Html.EditorFor(model => model.Start_time, new { htmlAttributes = new { @class = "form-control timepicker", placeholder = "11:00:00" } })
+                    <span class="add-on"><i class="glyphicon glyphicon-time"></i></span>
+                    @Html.ValidationMessageFor(model => model.Start_time, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group col-md-3">
+                @Html.LabelFor(model => model.LastCall, htmlAttributes: new { @class = "control-label col-md-6" })
+                <div class="col-md-12">
+                    @Html.EditorFor(model => model.LastCall, new { htmlAttributes = new { @class = "form-control timepicker", placeholder = "11:00:00" } })
+                    <span class="add-on"><i class="glyphicon glyphicon-time"></i></span>
+                    @Html.ValidationMessageFor(model => model.LastCall, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group col-md-3">
+                @Html.LabelFor(model => model.Close_time, htmlAttributes: new { @class = "control-label col-md-6" })
+                <div class="col-md-12">
+                    @Html.EditorFor(model => model.Close_time, new { htmlAttributes = new { @class = "form-control timepicker", placeholder = "11:00:00" } })
+                    <span class="add-on"><i class="glyphicon glyphicon-time"></i></span>
+                    @Html.ValidationMessageFor(model => model.Close_time, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-inline">
+            <div class="form-group col-md-4">
+                @Html.LabelFor(model => model.Found_Date, htmlAttributes: new { @class = "control-label col-md-5" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Found_Date, new { htmlAttributes = new { @class = "form-control", placeholder = "1997" } })
+                    @Html.ValidationMessageFor(model => model.Found_Date, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group col-md-4">
+                @Html.LabelFor(model => model.Stay_Time, htmlAttributes: new { @class = "control-label col-md-5" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Stay_Time, new { htmlAttributes = new { @class = "form-control", placeholder = "60" } })
+                    @Html.ValidationMessageFor(model => model.Stay_Time, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group col-md-4">
+                @Html.LabelFor(model => model.Bulit_Area, htmlAttributes: new { @class = "control-label col-md-5" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Bulit_Area, new { htmlAttributes = new { @class = "form-control", placeholder = "1000" } })
+                    @Html.ValidationMessageFor(model => model.Bulit_Area, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-inline">
+            <div class="form-group col-md-6">
+                @Html.LabelFor(model => model.Addr, htmlAttributes: new { @class = "control-label col-md-5" })
+                <div class="col-md-12">
+                    @Html.EditorFor(model => model.Addr, new { htmlAttributes = new { @class = "form-control col-md-6", Style = "width:100%", placeholder = "沖繩縣國頭郡本部町字石川424番地" } })
+                    @Html.ValidationMessageFor(model => model.Addr, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group col-md-6">
+                @Html.LabelFor(model => model.Introduction, htmlAttributes: new { @class = "control-label col-md-5" })
+                <div class="col-md-12">
+                    @Html.EditorFor(model => model.Introduction, new { htmlAttributes = new { @class = "form-control col-md-6", Style = "width:100%", placeholder = "沖繩美麗海水族館是亞洲最大的水族館…" } })
+                    @Html.ValidationMessageFor(model => model.Introduction, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-inline">
+            <div class="form-group col-md-6">
+                @Html.LabelFor(model => model.Locate_des, htmlAttributes: new { @class = "control-label col-md-5" })
+                <div class="col-md-12">
+                    @Html.EditorFor(model => model.Locate_des, new { htmlAttributes = new { @class = "form-control", Style = "width:100%", placeholder = "沖繩島北方" } })
+                    @Html.ValidationMessageFor(model => model.Locate_des, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group col-md-6">
+                @Html.LabelFor(model => model.Suggestion, htmlAttributes: new { @class = "control-label col-md-5" })
+                <div class="col-md-12">
+                    @Html.EditorFor(model => model.Suggestion, new { htmlAttributes = new { @class = "form-control", Style = "width:100%", placeholder = "下車參觀" } })
+                    @Html.ValidationMessageFor(model => model.Suggestion, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-inline">
+            <div class="form-group col-md-6">
+                @Html.LabelFor(model => model.Dayoff, htmlAttributes: new { @class = "control-label col-md-5" })
+                <div class="col-md-12">
+                    @Html.EditorFor(model => model.Dayoff, new { htmlAttributes = new { @class = "form-control", Style = "width:100%", placeholder = "每個星期一" } })
+                    @Html.ValidationMessageFor(model => model.Dayoff, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group col-md-6">
+                @Html.LabelFor(model => model.TimeSheet, htmlAttributes: new { @class = "control-label col-md-5" })
+                <div class="col-md-12">
+                    @Html.EditorFor(model => model.TimeSheet, new { htmlAttributes = new { @class = "form-control", Style = "width:100%", placeholder = "海豚劇場 11:00 13:00 14:30" } })
+                    @Html.ValidationMessageFor(model => model.TimeSheet, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-inline">
+            <div class="form-group col-md-4">
+                @Html.LabelFor(model => model.SafeLevel, htmlAttributes: new { @class = "control-label col-md-5" })
+                <div class="col-md-10">
+                    @*@Html.EditorFor(model => model.SafeLevel, new { htmlAttributes = new { @class = "form-control" } })*@
+                    @Html.DropDownList("SafeLevel", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.SafeLevel, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group col-md-4">
+                @*@Html.LabelFor(model => model.MainPoint, htmlAttributes: new { @class = "control-label col-md-5" })*@
+                    <div class="checkbox">
+                        @Html.LabelFor(model => model.MainPoint, htmlAttributes: new { @class = "control-label" })
+                        @Html.CheckBox("MainPoint", htmlAttributes: new { style = "" })
+                        @Html.ValidationMessageFor(model => model.MainPoint, "", new { @class = "text-danger" })
+                    </div>
+            </div>
+            <div class="form-group col-md-4">               
+                    <div class="checkbox">
+                        @Html.LabelFor(model => model.ForNight, htmlAttributes: new { @class = "control-label" })
+                        @Html.CheckBox("ForNight")
+                        @Html.ValidationMessageFor(model => model.ForNight, "", new { @class = "text-danger" })
+                    </div>
+            </div>
+        </div>
+
+        <div class="form-group">            
+            <div class="col-md-12">
+                @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label" })
+                @*@Html.EditorFor(model => model.Status, new { htmlAttributes = new { @class = "form-control" } })*@
+                @Html.DropDownList("Status", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <p></p>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="確定" class="btn btn-info" />
+                @Html.ActionLink("取消", "Index", null, htmlAttributes: new { @class = "btn btn-primary" })
+            </div>
+        </div>
+    </div>
+}
+

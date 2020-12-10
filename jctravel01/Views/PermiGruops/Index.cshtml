@@ -1,0 +1,91 @@
+﻿@model IPagedList<jctravel01.Models.PermiGruop>
+
+@{
+    ViewBag.Title = "權限群組";
+}
+@section styles{
+    <link rel="stylesheet" href="~/Content/PagedList.css" />
+    <style>
+        th {
+            white-space: nowrap;
+        }
+    </style>
+
+}
+@section scripts{
+    <script>
+        $("#reset").click(function () {
+            $(".form-control").val("");
+            return false;
+        })
+    </script>
+}
+@{
+    int colorNum = 1;
+    string color = "antiquewhite"; @*設定表格顏色*@
+    string trColor = "blueviolet";
+    int RowsCountMin = ViewBag.RowCountMin;
+}
+<h2>權限群組列表</h2>
+@using (Html.BeginForm())
+{
+    <fieldset>
+        <legend>快速查詢</legend>
+        <div class="form-inline">
+            <div class="form-group col-md-4">
+                @Html.LabelFor(model => model.FirstOrDefault().PermiGpNo, htmlAttributes: new { @class = "control-label" })
+                @Html.Editor("PermiGpNo", new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+            <div class="form-group col-md-4">
+                @Html.LabelFor(model => model.FirstOrDefault().PermiGpName, htmlAttributes: new { @class = "control-label" })
+                @Html.Editor("PermiGpName", new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+        <p style="padding-top:20px"></p>
+        <div class="form-inline col-md-offset-4" style="margin-top:20px">
+            <input type="hidden" name="Page" value="1" />
+            <input type="submit" class="btn btn-success" value="送出查詢" />
+            <a id="reset" href="#" class="btn btn-warning">清空</a>
+        </div>
+    </fieldset>
+}
+<p>
+    @Html.ActionLink("新增權限群組", "Create", null, htmlAttributes: new { @class = "btn btn-primary" })
+</p>
+<table class="table">
+    <tr style="background-color:@color">
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().PermiGpNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().PermiGpName)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        if (colorNum % 2 != 0)
+        {
+            color = "#b8f1f3";
+        }
+        else
+        {
+            color = "antiquewhite";
+        }
+        colorNum++;
+        <tr style="background-color:@color;color:@trColor;">
+            <td>
+                @(RowsCountMin++)
+                @Html.ActionLink(item.PermiGpNo, "Edit", new { id = item.PermiGpNo }, new { @class = "btn btn-primary" })
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PermiGpName)
+            </td>
+        </tr>
+    }
+
+</table>
+<h5 style="margin:0 auto; width:10%; color:blue;">共 @ViewBag.DataCount 筆資料</h5>
+<div class="pager">
+    @Html.PagedListPager(Model, Page => Url.Action("Index", new { Page, ViewBag.PermiGpNo, ViewBag.PermiGpName }))
+</div>

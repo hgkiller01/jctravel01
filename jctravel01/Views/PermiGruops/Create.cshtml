@@ -1,0 +1,474 @@
+﻿@model jctravel01.Models.ViewModel.PermiGruopCreateViewModel
+
+@{
+    ViewBag.Title = "新增權限群組";
+    int poicount = 0;
+    bool MainIsChecked = false;
+}
+@section scripts{
+    @*<script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>*@
+    <script type="text/javascript" src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
+    <script src="~/Scripts/jquery.tree.min.js"></script>
+<script src="~/Scripts/angular.js"></script>
+<script src="~/Scripts/angular.min.js"></script>
+    @*<script src="~/Scripts/jquery.tree.js"></script>*@
+    <script>
+            $("#tree").tree();
+            $("#tree2").tree();
+            $("#tree3").tree();
+            $("#tree4").tree();
+            $("#tree5").tree();
+            $("#tree6").tree();
+            $("#tree7").tree();
+            $("#tree8").tree();
+            //function checkChange() {
+            //    if ($(this).is(':checked')) {
+            //        $(this).parent().siblings().first().children('label').children(':checkbox').attr('checked', 'checked');
+            //    }
+            //}
+    </script>
+}
+@section styles{
+    <link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />
+    <link href="~/Content/jquery.tree.min.css" rel="stylesheet" />
+}
+<h2>新增權限群組</h2>
+<div ng-app="">
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.PermiGpNo, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10 input-group">
+                <span class="input-group-addon" style="color:red">*</span>
+                @Html.EditorFor(model => model.PermiGpNo, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PermiGpNo, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PermiGpName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10 input-group">
+                <span class="input-group-addon" style="color:red">*</span>
+                @Html.EditorFor(model => model.PermiGpName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PermiGpName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Descri, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10 input-group">
+                <span class="input-group-addon" style="color:red">*</span>
+                @Html.EditorFor(model => model.Descri, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Descri, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3" id="tree">
+            <ul>
+                <li>
+                    @foreach (var item in Model.POIPermi)
+                    {
+                        if (item.ReadPermi || item.ChPermi || item.SharePermi)
+                        {
+                            <label><input checked type="checkbox" /> 旅遊元件管理</label>
+                            MainIsChecked = true;
+                            break;
+                        }
+                    }
+                    @if (!MainIsChecked)
+                    {
+                        <label><input type="checkbox" /> 旅遊元件管理</label>
+                    }
+                    else
+                    {
+                        MainIsChecked = false;
+                    }
+                    <ul>
+                        @foreach (var item in Model.POIPermi)
+                        {
+                            <li>
+                                @{string indexIsCheck = item.ReadPermi || item.ChPermi || item.SharePermi ? "checked" : "";}
+                                <label><input type="checkbox" name="permi[@poicount].PermiIndex" @indexIsCheck value="@item.PermiIndex" />@item.AltPerName</label>
+                                <ul>
+                                    <li>
+                                        @{string readpermi = item.ReadPermi ? "checked" : ""; string share = item.PermiNo + "S";}
+                                        <label><input type="checkbox" ng-checked="@item.PermiNo" name="permi[@poicount].ReadPermi" @readpermi value="true" /><input type="hidden" name="permi[@poicount].ReadPermi" value="false" />讀取</label>
+                                    </li>
+                                    <li>
+                                        @{string ChPermi = item.ChPermi ? "checked" : ""; }
+                                        <label><input type="checkbox" ng-model="@item.PermiNo" name="permi[@poicount].ChPermi" @ChPermi value="true" /><input type="hidden" name="permi[@poicount].ChPermi" value="false" />修改</label>
+                                    </li>
+                                    
+                                    <li>
+                                        @{string SharePermi = item.SharePermi ? "checked" : "";}
+                                        <label><input type="checkbox" ng-model="@share" name="permi[@poicount].SharePermi" @SharePermi value="true" /><input type="hidden" name="permi[@poicount].SharePermi" value="false" />共享</label>
+                                    </li>
+                                </ul>
+                            </li>
+                         poicount++;
+                        }
+                    </ul>
+                </li>
+            </ul>
+
+
+
+        </div>
+
+        <div class="col-md-3" id="tree2">
+            <ul>
+                <li>
+                    @foreach (var item in Model.TourPermi)
+                    {
+                        if (item.ReadPermi || item.ChPermi || item.SharePermi)
+                        {
+                            <label><input checked type="checkbox" /> 團產管理</label>
+                            MainIsChecked = true;
+                            break;
+                        }
+                    }
+                    @if (!MainIsChecked)
+                    {
+                        <label><input type="checkbox" /> 團產管理</label>
+                    }
+                    else
+                    {
+                        MainIsChecked = false;
+                    }
+                    <ul>
+                        @foreach (var item in Model.TourPermi)
+                        {
+                            <li>
+                                @{string indexIsCheck = item.ReadPermi || item.ChPermi || item.SharePermi ? "checked" : "";}
+                                <label><input type="checkbox" name="permi[@poicount].PermiIndex" @indexIsCheck value="@item.PermiIndex" />@item.AltPerName</label>
+                                <ul>
+                                    <li>
+                                        @{string readpermi = item.ReadPermi ? "checked" : ""; string share = item.PermiNo + "S";}
+                                        <label><input type="checkbox" ng-model="@share" ng-checked="@item.PermiNo" name="permi[@poicount].ReadPermi" @readpermi value="true" /><input type="hidden" name="permi[@poicount].ReadPermi" value="false" />讀取</label>
+                                    </li>
+                                    <li>
+                                        @{string ChPermi = item.ChPermi ? "checked" : ""; }
+                                        <label><input type="checkbox" ng-model="@item.PermiNo" name="permi[@poicount].ChPermi" @ChPermi value="true" /><input type="hidden" name="permi[@poicount].ChPermi" value="false" />修改</label>
+                                    </li>
+                                    <li>
+                                        @{string SharePermi = item.SharePermi ? "checked" : "";}
+                                        <label><input type="checkbox" name="permi[@poicount].SharePermi" @SharePermi value="true" /><input type="hidden" name="permi[@poicount].SharePermi" value="false" />共享</label>
+                                    </li>
+                                </ul>
+                            </li>
+                       poicount++;
+                        }
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div class="col-md-3" id="tree3">
+            <ul>
+                <li>
+                    @foreach (var item in Model.SalesPermi)
+                    {
+                        if (item.ReadPermi || item.ChPermi || item.SharePermi)
+                        {
+                            <label><input checked type="checkbox" /> 業務作業管理</label>
+                            MainIsChecked = true;
+                            break;
+                        }
+                    }
+                    @if (!MainIsChecked)
+                    {
+                        <label><input type="checkbox" /> 業務作業管理</label>
+                    }
+                    else
+                    {
+                        MainIsChecked = false;
+                    }
+                    <ul>
+                        @foreach (var item in Model.SalesPermi)
+                        {
+                            <li>
+                                @{string indexIsCheck = item.ReadPermi || item.ChPermi || item.SharePermi ? "checked" : "";}
+                                <label><input type="checkbox" name="permi[@poicount].PermiIndex" @indexIsCheck value="@item.PermiIndex" />@item.AltPerName</label>
+                                <ul>
+                                    <li>
+                                        @{string readpermi = item.ReadPermi ? "checked" : ""; string share = item.PermiNo + "S";}
+                                        <label><input type="checkbox" ng-model="@share" ng-checked="@item.PermiNo" name="permi[@poicount].ReadPermi" @readpermi value="true" /><input type="hidden" name="permi[@poicount].ReadPermi" value="false" />讀取</label>
+                                    </li>
+                                    <li>
+                                        @{string ChPermi = item.ChPermi ? "checked" : ""; }
+                                        <label><input type="checkbox" ng-model="@item.PermiNo" name="permi[@poicount].ChPermi" @ChPermi value="true" /><input type="hidden" name="permi[@poicount].ChPermi" value="false" />修改</label>
+                                    </li>
+                                    <li>
+                                        @{string SharePermi = item.SharePermi ? "checked" : "";}
+                                        <label><input type="checkbox" name="permi[@poicount].SharePermi" @SharePermi value="true" /><input type="hidden" name="permi[@poicount].SharePermi" value="false" />共享</label>
+                                    </li>
+                                </ul>
+                            </li>
+                          poicount++;
+                        }
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div class="col-md-3" id="tree4">
+            <ul>
+                <li>
+                    @foreach (var item in Model.EmpPermi)
+                    {
+                        if (item.ReadPermi || item.ChPermi || item.SharePermi)
+                        {
+                            <label><input checked type="checkbox" /> 人員管理</label>
+                            MainIsChecked = true;
+                            break;
+                        }
+                    }
+                    @if (!MainIsChecked)
+                    {
+                        <label><input type="checkbox" /> 人員管理</label>
+                    }
+                    else
+                    {
+                        MainIsChecked = false;
+                    }
+                    <ul>
+                        @foreach (var item in Model.EmpPermi)
+                        {
+                            <li>
+                                @{string indexIsCheck = item.ReadPermi || item.ChPermi || item.SharePermi ? "checked" : "";}
+                                <label><input type="checkbox" name="permi[@poicount].PermiIndex" @indexIsCheck value="@item.PermiIndex" />@item.AltPerName</label>
+                                <ul>
+                                    <li>
+                                        @{string readpermi = item.ReadPermi ? "checked" : ""; string share = item.PermiNo + "S";}
+                                        <label><input type="checkbox" ng-model="@share" ng-checked="@item.PermiNo" name="permi[@poicount].ReadPermi" @readpermi value="true" /><input type="hidden" name="permi[@poicount].ReadPermi" value="false" />讀取</label>
+                                    </li>
+                                    <li>
+                                        @{string ChPermi = item.ChPermi ? "checked" : ""; }
+                                        <label><input type="checkbox" ng-model="@item.PermiNo" name="permi[@poicount].ChPermi" @ChPermi value="true" /><input type="hidden" name="permi[@poicount].ChPermi" value="false" />修改</label>
+                                    </li>
+                                    <li>
+                                        @{string SharePermi = item.SharePermi ? "checked" : "";}
+                                        <label><input type="checkbox" name="permi[@poicount].SharePermi" @SharePermi value="true" /><input type="hidden" name="permi[@poicount].SharePermi" value="false" />共享</label>
+                                    </li>
+                                </ul>
+                            </li>
+                        poicount++;
+                        }
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3" id="tree5">
+            <ul>
+                <li>
+                    @foreach (var item in Model.PermiPermi)
+                    {
+                        if (item.ReadPermi || item.ChPermi || item.SharePermi)
+                        {
+                            <label><input checked type="checkbox" /> 權限管理</label>
+                            MainIsChecked = true;
+                            break;
+                        }
+                    }
+                    @if (!MainIsChecked)
+                    {
+                        <label><input type="checkbox" /> 權限管理</label>
+                    }
+                    else
+                    {
+                        MainIsChecked = false;
+                    }
+                    <ul>
+                        @foreach (var item in Model.PermiPermi)
+                        {
+                            <li>
+                                @{string indexIsCheck = item.ReadPermi || item.ChPermi || item.SharePermi ? "checked" : "";}
+                                <label><input type="checkbox" name="permi[@poicount].PermiIndex" @indexIsCheck value="@item.PermiIndex" />@item.AltPerName</label>
+                                <ul>
+                                    <li>
+                                        @{string readpermi = item.ReadPermi ? "checked" : ""; string share = item.PermiNo + "S";}
+                                        <label><input type="checkbox" ng-model="@share" ng-checked="@item.PermiNo" name="permi[@poicount].ReadPermi" @readpermi value="true" /><input type="hidden" name="permi[@poicount].ReadPermi" value="false" />讀取</label>
+                                    </li>
+                                    <li>
+                                        @{string ChPermi = item.ChPermi ? "checked" : ""; }
+                                        <label><input type="checkbox" ng-model="@item.PermiNo" name="permi[@poicount].ChPermi" @ChPermi value="true" /><input type="hidden" name="permi[@poicount].ChPermi" value="false" />修改</label>
+                                    </li>
+                                    <li>
+                                        @{string SharePermi = item.SharePermi ? "checked" : "";}
+                                        <label><input type="checkbox" name="permi[@poicount].SharePermi" @SharePermi value="true" /><input type="hidden" name="permi[@poicount].SharePermi" value="false" />共享</label>
+                                    </li>
+                                </ul>
+                            </li>
+                         poicount++;
+                        }
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div class="col-md-3" id="tree6">
+            <ul>
+                <li>
+                    @foreach (var item in Model.FrontEndPermi)
+                    {
+                        if (item.ReadPermi || item.ChPermi || item.SharePermi)
+                        {
+                            <label><input checked type="checkbox" /> 網站前台管理</label>
+                            MainIsChecked = true;
+                            break;
+                        }
+                    }
+                    @if (!MainIsChecked)
+                    {
+                        <label><input type="checkbox" /> 網站前台管理</label>
+                    }
+                    else
+                    {
+                        MainIsChecked = false;
+                    }
+                    <ul>
+                        @foreach (var item in Model.FrontEndPermi)
+                        {
+                            <li>
+                                @{string indexIsCheck = item.ReadPermi || item.ChPermi || item.SharePermi ? "checked" : "";}
+                                <label><input type="checkbox" name="permi[@poicount].PermiIndex" @indexIsCheck value="@item.PermiIndex" />@item.AltPerName</label>
+                                <ul>
+                                    <li>
+                                        @{string readpermi = item.ReadPermi ? "checked" : ""; string share = item.PermiNo + "S";}
+                                        <label><input type="checkbox" ng-model="@share" ng-checked="@item.PermiNo" name="permi[@poicount].ReadPermi" @readpermi value="true" /><input type="hidden" name="permi[@poicount].ReadPermi" value="false" />讀取</label>
+                                    </li>
+                                    <li>
+                                        @{string ChPermi = item.ChPermi ? "checked" : ""; }
+                                        <label><input type="checkbox" ng-model="@item.PermiNo" name="permi[@poicount].ChPermi" @ChPermi value="true" /><input type="hidden" name="permi[@poicount].ChPermi" value="false" />修改</label>
+                                    </li>
+                                    <li>
+                                        @{string SharePermi = item.SharePermi ? "checked" : "";}
+                                        <label><input type="checkbox" name="permi[@poicount].SharePermi" @SharePermi value="true" /><input type="hidden" name="permi[@poicount].SharePermi" value="false" />共享</label>
+                                    </li>
+                                </ul>
+                            </li>
+                          poicount++;
+                        }
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div class="col-md-3" id="tree7">
+            <ul>
+                <li>
+                    @foreach (var item in Model.BasicPermi)
+                    {
+                        if (item.ReadPermi || item.ChPermi || item.SharePermi)
+                        {
+                            <label><input checked type="checkbox" /> 共用作業</label>
+                            MainIsChecked = true;
+                            break;
+                        }
+                    }
+                    @if (!MainIsChecked)
+                    {
+                        <label><input type="checkbox" /> 共用作業</label>
+                    }
+                    else
+                    {
+                        MainIsChecked = false;
+                    }
+                    <ul>
+                        @foreach (var item in Model.BasicPermi)
+                        {
+                            <li>
+                                @{string indexIsCheck = item.ReadPermi || item.ChPermi || item.SharePermi ? "checked" : "";}
+                                <label><input type="checkbox" name="permi[@poicount].PermiIndex" @indexIsCheck value="@item.PermiIndex" />@item.AltPerName</label>
+                                <ul>
+                                    <li>
+                                        @{string readpermi = item.ReadPermi ? "checked" : ""; string share = item.PermiNo + "S";}
+                                        <label><input type="checkbox" ng-model="@share" ng-checked="@item.PermiNo" name="permi[@poicount].ReadPermi" @readpermi value="true" /><input type="hidden" name="permi[@poicount].ReadPermi" value="false" />讀取</label>
+                                    </li>
+                                    <li>
+                                        @{string ChPermi = item.ChPermi ? "checked" : ""; }
+                                        <label><input type="checkbox" ng-model="@item.PermiNo" name="permi[@poicount].ChPermi" @ChPermi value="true" /><input type="hidden" name="permi[@poicount].ChPermi" value="false" />修改</label>
+                                    </li>
+                                    <li>
+                                        @{string SharePermi = item.SharePermi ? "checked" : "";}
+                                        <label><input type="checkbox" name="permi[@poicount].SharePermi" @SharePermi value="true" /><input type="hidden" name="permi[@poicount].SharePermi" value="false" />共享</label>
+                                    </li>
+                                </ul>
+                            </li>
+                          poicount++;
+                        }
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div class="col-md-3" id="tree8">
+            <ul>
+                <li>
+                    @foreach (var item in Model.AccountPermi)
+                    {
+                        if (item.ReadPermi || item.ChPermi || item.SharePermi)
+                        {
+                            <label><input checked type="checkbox" /> 入帳作業</label>
+                            MainIsChecked = true;
+                            break;
+                        }
+                    }
+                    @if (!MainIsChecked)
+                    {
+                        <label><input type="checkbox" /> 入帳作業</label>
+                    }
+                    else
+                    {
+                        MainIsChecked = false;
+                    }
+                    <ul>
+                        @foreach (var item in Model.AccountPermi)
+                        {
+                            <li>
+                                @{string indexIsCheck = item.ReadPermi || item.ChPermi || item.SharePermi ? "checked" : "";}
+                                <label><input type="checkbox" name="permi[@poicount].PermiIndex" @indexIsCheck value="@item.PermiIndex" />@item.AltPerName</label>
+                                <ul>
+                                    <li>
+                                        @{string readpermi = item.ReadPermi ? "checked" : ""; string share = item.PermiNo + "S";}
+                                        <label><input type="checkbox" ng-model="@share" ng-checked="@item.PermiNo" name="permi[@poicount].ReadPermi" @readpermi value="true" /><input type="hidden" name="permi[@poicount].ReadPermi" value="false" />讀取</label>
+                                    </li>
+                                    <li>
+                                        @{string ChPermi = item.ChPermi ? "checked" : ""; }
+                                        <label><input type="checkbox" ng-model="@item.PermiNo" name="permi[@poicount].ChPermi" @ChPermi value="true" /><input type="hidden" name="permi[@poicount].ChPermi" value="false" />修改</label>
+                                    </li>
+                                    <li>
+                                        @{string SharePermi = item.SharePermi ? "checked" : "";}
+                                        <label><input type="checkbox" name="permi[@poicount].SharePermi" @SharePermi value="true" /><input type="hidden" name="permi[@poicount].SharePermi" value="false" />共享</label>
+                                    </li>
+                                </ul>
+                            </li>
+                       poicount++;
+                        }
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+
+    <div class="form-group">
+        <div class="col-md-offset-4 col-md-10">
+            <input type="submit" value="確定" class="btn btn-primary" />|
+            @Html.ActionLink("取消", "Index", null, htmlAttributes: new { @class = "btn btn-success" })
+        </div>
+    </div>
+}
+</div>
+
+

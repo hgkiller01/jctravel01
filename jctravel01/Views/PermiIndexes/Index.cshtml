@@ -1,0 +1,81 @@
+﻿@model IEnumerable<jctravel01.Models.PermiIndex>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.PermiNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MainPerNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MainPerName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AltPerNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AltPerName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreateBy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreateBy_Time)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UpdateBy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UpdateBy_Time)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.PermiNo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MainPerNo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MainPerName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AltPerNo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AltPerName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreateBy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreateBy_Time)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UpdateBy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UpdateBy_Time)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Permilindex }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Permilindex }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Permilindex })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,114 @@
+﻿@model jctravel01.Models.PermiGruop
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>PermiGruop</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PermiGpNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PermiGpNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PermiGpName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PermiGpName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Descri)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descri)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SharePermi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SharePermi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ChPermi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ChPermi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReadPermi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReadPermi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreateBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreateBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreateBy_Time)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreateBy_Time)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UpdateBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UpdateBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UpdateBy_Time)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UpdateBy_Time)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CoIndex.ComName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CoIndex.ComName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PermiIndex1.PermiNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PermiIndex1.PermiNo)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.PermiGpIndex }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

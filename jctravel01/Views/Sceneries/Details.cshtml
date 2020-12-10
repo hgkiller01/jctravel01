@@ -1,0 +1,337 @@
+﻿@model jctravel01.Models.Scenery
+
+@{
+    ViewBag.Title = "景點詳細資料";
+}
+@section styles{
+    <style>
+        dd {
+            background-color: aquamarine;
+        }
+
+        dt {
+            background-color: ActiveCaption;
+        }
+    </style>
+}
+<h2>景點詳細資料</h2>
+
+<div>
+    <h4>詳細資料如下</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Scenery_no)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Scenery_no)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Country01.Country_no)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Country01.Cname)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.City03.City_no)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.City03.Cname)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ShortName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ShortName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ename)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ename)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Area)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Area)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tele_CountryCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tele_CountryCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tele_Area)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tele_Area)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tele_number)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tele_number)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Fax)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fax)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.URL)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.URL)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Blog)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Blog)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Longitude)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Longitude)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Latitude)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Latitude)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Addr)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Addr)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Introduction)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Introduction)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Fee)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fee)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Locate_des)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Locate_des)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Found_Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Found_Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Stay_Time)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Stay_Time)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Bulit_Area)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Bulit_Area)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Suggestion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Suggestion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Start_time)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Start_time)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastCall)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastCall)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Close_time)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Close_time)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TimeSheet)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TimeSheet)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Dayoff)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Dayoff)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ForNight)
+        </dt>
+        @if (Model.ForNight == true)
+        {
+            <dd>
+                是
+            </dd>
+        }
+        else
+        {
+            <dd>
+                否
+            </dd>
+        }
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SafeLevel)
+        </dt>
+
+        <dd>
+            @Html.Display("ShowSafeLevel")
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MainPoint)
+        </dt>
+        @if (Model.MainPoint == true)
+        {
+            <dd>
+                是
+            </dd>
+        }
+        else
+        {
+            <dd>
+                否
+            </dd>
+        }
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+
+        <dd>
+            @Html.Display("ShowStuatus")
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreateBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreateBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreateBy_Time)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreateBy_Time)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UpdateBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UpdateBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UpdateBy_Time)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UpdateBy_Time)
+        </dd>
+
+    </dl>
+</div>
+
+
+
+<p>
+    @Html.ActionLink("編輯此筆資料", "Edit", new { id = Model.Scenery_no }, htmlAttributes: new { @class = "btn btn-primary" }) |
+    @Html.ActionLink("回到列表", "Index", null, htmlAttributes: new { @class = "btn btn-success" })
+</p>

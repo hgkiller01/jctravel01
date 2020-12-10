@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewBag.Title = "Children";
+}
+@section scripts{
+    <script>
+        $(function () {
+            $("#input").val($("#textInput", opener.document).val());
+
+        })
+        $("#Clickme").click(function () {
+            $("#textInput", opener.document).val($("#input").val());
+            window.close();
+            return false;
+        })
+    </script>
+}
+<h2>Children</h2>
+    @Html.TextBox("input","", htmlAttributes: new {id="input" })
+    @Html.ActionLink("傳值給母視窗", null, null, new {@class="btn btn-primary",id="Clickme" })
+

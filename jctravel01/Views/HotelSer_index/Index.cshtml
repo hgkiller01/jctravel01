@@ -1,0 +1,118 @@
+﻿@model IPagedList<jctravel01.Models.HotelSer_index>
+
+@{
+    ViewBag.Title = "旅館服務";
+}
+
+<h2>旅館服務列表</h2>
+@section styles{
+    <link rel="stylesheet" href="~/Content/PagedList.css" />
+    <style>
+        th, td {
+            white-space: nowrap;
+        }
+    </style>
+}
+@section scripts{
+    <script>
+        $("#reset").click(function () {
+            $(".form-control").val("");
+            return false;
+        })
+    </script>
+}
+@{
+    int colorNum = 1;
+    string color = "antiquewhite"; @*設定表格顏色*@
+    string trColor = "";
+    int RowsCountMin = ViewBag.RowCountMin;
+}
+@using (Html.BeginForm())
+{
+    <fieldset>
+        <legend>快速查詢</legend>
+        <div class="form-inline">
+            <div class="form-group col-md-4">
+                @Html.LabelFor(model => model.FirstOrDefault().Hotel_Ser_code, htmlAttributes: new { @class = "control-label" })
+                @Html.Editor("Hotel_Ser_code", new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+            <div class="form-group col-md-4">
+                @Html.LabelFor(model => model.FirstOrDefault().Cname, htmlAttributes: new { @class = "control-label" })
+                @Html.Editor("Cname", new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+            <div class="form-group col-md-4">
+                @Html.LabelFor(model => model.FirstOrDefault().Ename, htmlAttributes: new { @class = "control-label" })
+                @Html.Editor("Ename", new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+        <p style="padding-top:20px"></p>
+
+        <div class="form-inline col-md-offset-5" style="margin-top:20px">
+            <div class="form-group">
+                <input type="submit" class="btn btn-success" value="送出查詢" />
+                <a id="reset" href="#" class="btn btn-warning">清空</a>
+                <input type="hidden" name="Page" value="1" />
+            </div>
+        </div>
+    </fieldset>
+}
+<p>
+    @Html.ActionLink("新增旅館服務", "Create",null, htmlAttributes: new { @class = "btn btn-primary" })
+</p>
+<table class="table">
+    <tr style="background-color:@color">
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Hotel_Ser_code)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().ShortName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Cname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Ename)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        if (colorNum % 2 != 0)
+        {
+            color = "#b8f1f3";
+        }
+        else
+        {
+            color = "antiquewhite";
+        }
+        if (item.Status == 1)
+        {
+            trColor = "blueviolet";
+        }
+        else
+        {
+            trColor = "dimgray";
+        }
+        colorNum++;
+        <tr style="background-color:@color;color:@trColor;">
+            <td>
+                @(RowsCountMin++)
+                @Html.ActionLink(item.Hotel_Ser_code, "Edit", new { id = item.Hotel_Ser_no }, htmlAttributes: new { @class = "btn btn-primary" })
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ShortName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ename)
+            </td>
+        </tr>
+    }
+
+</table>
+<h5 style="margin:0 auto; width:10%; color:blue;">共 @ViewBag.DataCount 筆資料</h5>
+<div class="pager">
+    @Html.PagedListPager(Model, Page => Url.Action("Index", new { Page, ViewBag.Hotel_Ser_code, ViewBag.Cname, ViewBag.Ename }))
+</div>

@@ -1,0 +1,15 @@
+﻿
+@{
+    ViewBag.Title = "Father";
+}
+@section scripts{
+   <script>
+       function openWindow() {
+           var getWindow = window.open('@Url.Action("Children")', 'Children', 'width=400,height=400');
+       }
+    </script>
+}
+<h2>Father</h2>
+    @Html.TextBox("textInput", "", new {id="textInput" })
+    <input type="button" value="打開子視窗" onclick="openWindow()">
+

@@ -1,0 +1,115 @@
+﻿@model IPagedList<jctravel01.Models.logInLog>
+
+@{
+    ViewBag.Title = "登入記錄";
+}
+
+<h2>登入記錄</h2>
+@section styles{
+    <link rel="stylesheet" href="~/Content/PagedList.css" />
+    <style>
+        th, td {
+            white-space: nowrap;
+        }
+    </style>
+}
+@section scripts{
+    <script>
+        $("#reset").click(function () {
+            $(".form-control").val("");
+            return false;
+        })
+    </script>
+}
+@{
+    int colorNum = 1;
+    string color = "antiquewhite"; @*設定表格顏色*@
+    string trColor = "";
+    int RowsCountMin = ViewBag.RowCountMin;
+}
+@using (Html.BeginForm())
+{
+    <fieldset>
+        <legend>快速查詢</legend>
+        <div class="form-inline">
+            <div class="form-group col-lg-offset-4">
+                @Html.DropDownList("Select", ViewBag.SelectBar as SelectList, "請選擇", htmlAttributes: new { @class = "form-control" })
+                @Html.Editor("Search", new { htmlAttributes = new { @class = "form-control" } })
+                <input type="submit" class="btn btn-success" value="送出查詢" />
+                <a id="reset" href="#" class="btn btn-warning">清空</a>
+                <input type="hidden" name="Page" value="1" />
+            </div>
+        </div>
+    </fieldset>
+}
+    <table class="table">
+        <tr style="background-color:@color">
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().HRInfo.EmpName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().LogInPlace)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().LogInTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().LogInPsd)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().ErrorLogInLog)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().AllowLogIn)
+            </th>
+        </tr>
+@foreach (var item in Model) {
+    if (colorNum % 2 != 0)
+    {
+        color = "#b8f1f3";
+    }
+    else
+    {
+        color = "antiquewhite";
+    }
+    if (item.ErrorLogInLog)
+    {
+        trColor = "blueviolet";
+    }
+    else
+    {
+        trColor = "dimgray";
+    }
+    colorNum++;
+            <tr style="background-color:@color;color:@trColor;">
+                <td>
+                    @(RowsCountMin++)                    
+                    @Html.DisplayFor(modelItem => item.HRInfo.EmpName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LogInTime)
+                </td>
+                <td>
+                    @if(item.ErrorLogInLog)
+                    {
+                        @Html.DisplayFor(modelItem => item.LogInPsd)
+                    }
+                    
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ErrorLogInLog)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AllowLogIn)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LogInPlace)
+                </td>
+            </tr>
+    }
+
+    </table>
+<h5 style="margin:0 auto; width:10%; color:blue;">共 @ViewBag.DataCount 筆資料</h5>
+<div class="pager">
+    @Html.PagedListPager(Model, Page => Url.Action("Index", new { Page, ViewBag.Select, ViewBag.Search }))
+</div>

@@ -1,0 +1,88 @@
+﻿@model jctravel01.Models.ViewModel.MemberLogin2
+
+@{
+    ViewBag.Title = "選擇登入位置";
+}
+@section styles{
+<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/themes/hot-sneaks/jquery-ui.css" rel="stylesheet">
+}
+@section scripts{
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+<script src="~/Scripts/jquery.ui.datepicker-zh-TW.js"></script>
+    <script>
+
+        $(function () {
+            
+            $('input[type=radio][name=AtWhere]').change(function () {
+                if ($(this).val() !="家中") {
+                    $("#Location:text").removeAttr("readonly");
+                }
+                else {
+                    $("#Location:text").attr("readonly", "readonly");
+                }
+
+            })
+            $("#BirthDay").datepicker({
+                format: 'yyyy/mm/dd', showOn: "button", buttonText: "日曆", buttonImage: "@Url.Content("~/images/calendar.gif")",
+                minDate: new Date(1911, 1, 1),defaultDate: new Date(1951,1,1), changeYear: true, changeMonth: true, maxDate: '-0'
+        });
+
+        })
+       
+    </script>
+}
+<h2>選擇登入位置</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.AtWhere, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <label class="radio"><input type="radio" checked name="AtWhere" value="家中">家中</label>
+                <label class="radio"><input type="radio" id="OtherPlace" name="AtWhere" value="" />其他位置</label> @Html.EditorFor(model => model.Location, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.AtWhere, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.Location, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Location, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Location, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+        @Html.HiddenFor(model => model.empIndex)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.empID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.empID, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.empID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.BirthDay, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.BirthDay, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.BirthDay, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="確定" class="btn btn-primary" />
+                @Html.ActionLink("取消", "Index", null, new {@class="btn btn-info" })
+            </div>
+        </div>
+    </div>
+}
+

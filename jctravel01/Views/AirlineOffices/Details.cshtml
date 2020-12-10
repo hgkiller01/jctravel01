@@ -1,0 +1,136 @@
+﻿@model jctravel01.Models.AirlineOffice
+
+@{
+    ViewBag.Title = "詳細內容";
+}
+@section styles{
+    <style>
+        dd {
+            background-color: aquamarine;
+        }
+
+        dt {
+            background-color: ActiveCaption;
+        }
+    </style>
+}
+<h2>辦事處詳細內容</h2>
+
+<div style="width:60%;">
+    <h4>內容如下</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ALoffice_Code)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ALoffice_Code)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Airline.Cname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Airline.Cname)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Country_no)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Country01.Cname)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.City_no)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.City03.Cname)
+        </dd>
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tele_Order)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tele_Order)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Office_Number)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Office_Number)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Office_Fax)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Office_Fax)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Office_Addr)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Office_Addr)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Office_Mailbox)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Office_Mailbox)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+
+        <dd>
+            @Html.Display("ShowStuatus")
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreateBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreateBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreateBy_Time)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreateBy_Time)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UpdateBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UpdateBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UpdateBy_Time)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UpdateBy_Time)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("編輯此筆資料", "Edit", new { id = Model.ALoffice_Code }, htmlAttributes: new { @class = "btn btn-primary" }) |
+    @Html.ActionLink("回到列表", "Index", null, htmlAttributes: new { @class = "btn btn-success" })
+</p>

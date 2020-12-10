@@ -1,0 +1,28 @@
+﻿@{
+    ViewBag.Title = "首頁";
+}
+@section scripts{
+    <script>
+        @if (TempData["LoginSuccess"] != null)
+        {
+            @:alert("@TempData["LoginSuccess"]")
+                    }
+    @if (TempData["LogOut"] != null)
+        {
+            @:alert("@TempData["LogOut"]")
+        }
+        @if (TempData["PermitError"] != null)
+        {
+            @:alert("@TempData["PermitError"]")
+        }
+    </script>
+    @if (Session["Relogin"] != null)
+    {
+        Session.Remove("Relogin");
+    }
+}
+<div class="jumbotron">
+    <h1>ERP系統</h1>
+    <p class="lead">歡迎使用ERP系統</p>
+    <p>@Html.ActionLink("登入", "Index", new { Controller = "MemberLogin" }, htmlAttributes: new { @class = "btn btn-primary btn-lg" })</p>
+</div>

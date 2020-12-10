@@ -1,0 +1,124 @@
+﻿@model jctravel01.Models.State02
+
+@{
+    ViewBag.Title = "編輯州/省";
+}
+
+<h2>編輯州/省資料</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.StateIndex)
+        <h4>請填資料表單</h4>
+        <hr />
+    <div class="form-inline">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.State_no, htmlAttributes: new { @class = "control-label col-md-8" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.State_no, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })                
+            </div>
+            <p>@Html.ValidationMessageFor(model => model.State_no, "", new { @class = "text-danger" })</p>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.CountryIndex, htmlAttributes: new { @class = "control-label col-md-8" })
+            <div class="col-md-10 input-group">
+                <span class="input-group-addon" style="color:red;">*</span>
+                @Html.DropDownList("CountryIndex", null, htmlAttributes: new { @class = "form-control" })               
+            </div>
+            <p>@Html.ValidationMessageFor(model => model.CountryIndex, "", new { @class = "text-danger" })</p>
+        </div>
+    </div>
+
+    <div class="form-inline">
+        <div class="form-group">
+            @Html.LabelFor(model => model.ShortName, htmlAttributes: new { @class = "control-label col-md-8" })
+            <div class="col-md-10 input-group">
+                <span class="input-group-addon" style="color:red;">*</span>
+                @Html.EditorFor(model => model.ShortName, new { htmlAttributes = new { @class = "form-control", placeholder = "閩" } })               
+            </div>
+            <p>@Html.ValidationMessageFor(model => model.ShortName, "", new { @class = "text-danger" })</p>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Cname, htmlAttributes: new { @class = "control-label col-md-8" })
+            <div class="col-md-10 input-group">
+                <span class="input-group-addon" style="color:red;">*</span>
+                @Html.EditorFor(model => model.Cname, new { htmlAttributes = new { @class = "form-control", placeholder = "福建" } })               
+            </div>
+            <p>@Html.ValidationMessageFor(model => model.Cname, "", new { @class = "text-danger" })</p>
+        </div>
+      </div>
+    <div class="form-inline">
+        <div class="form-group">
+            @Html.LabelFor(model => model.Ename, htmlAttributes: new { @class = "control-label col-md-8" })
+            <div class="col-md-10 input-group">
+                <span class="input-group-addon" style="color:red;">*</span>
+                @Html.EditorFor(model => model.Ename, new { htmlAttributes = new { @class = "form-control", placeholder = "Fujian" } })
+            </div>
+            <p>@Html.ValidationMessageFor(model => model.Ename, "", new { @class = "text-danger" })</p>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-8" })
+            <div class="col-md-10">
+                @*@Html.EditorFor(model => model.Status, new { htmlAttributes = new { @class = "form-control" } })*@
+                @Html.DropDownList("Status", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+                @if (ViewBag.alert != null)
+                {
+                    <p style="color:red">@ViewBag.alert</p>
+                }
+            </div>
+        </div>
+     </div>
+    <div class="form-inline">
+        <div class="form-group">
+            @Html.LabelFor(model => model.CreateBy, htmlAttributes: new { @class = "control-label col-md-8" })
+            <div class="col-md-12">
+                @Html.Display("CreateBy")
+                @Html.HiddenFor(model => model.CreateBy)
+                @Html.ValidationMessageFor(model => model.CreateBy, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CreateBy_Time, htmlAttributes: new { @class = "control-label col-md-8" })
+            <div class="col-md-12">
+                @Html.DisplayFor(model => model.CreateBy_Time)
+                @Html.HiddenFor(model => model.CreateBy_Time)
+                @Html.ValidationMessageFor(model => model.CreateBy_Time, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <div class="form-inline">
+        <div class="form-group">
+            @Html.LabelFor(model => model.UpdateBy, htmlAttributes: new { @class = "control-label col-md-8" })
+            <div class="col-md-12">
+                @Html.Display("UpdateBy")
+                @Html.HiddenFor(model => model.UpdateBy)
+                @Html.ValidationMessageFor(model => model.UpdateBy_Time, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.UpdateBy_Time, htmlAttributes: new { @class = "control-label col-md-8" })
+            <div class="col-md-12">
+                @Html.DisplayFor(model => model.UpdateBy_Time)
+                @Html.HiddenFor(model => model.UpdateBy_Time)
+                @Html.ValidationMessageFor(model => model.UpdateBy_Time, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+        @Html.HiddenFor(model => model.CompanyNo)
+        <div class="form-group">
+            <div class="col-md-offset-2">
+                <input type="submit" value="確定" class="btn btn-primary" />|
+                @Html.ActionLink("取消", "Index", null, htmlAttributes: new { @class = "btn btn-primary" })|
+                @Html.ActionLink("刪除", "Delete", new { id = Model.StateIndex }, htmlAttributes: new { @class = "btn btn-warning" })
+                
+            </div>
+        </div>
+ }

@@ -1,0 +1,13 @@
+﻿@model jctravel01.Models.Hotel
+
+@{
+    ViewBag.Title = "選擇後續動作";
+}
+
+<h2 class="col-md-offset-3">建立旅館成功</h2>
+<div class="col-md-offset-2">
+    @Html.ActionLink("型態與主題", "AddTypeTheme", new { id = Model.HotelIndex }, htmlAttributes: new { @class = "btn btn-primary" })
+    @Html.ActionLink("服務與房內設備", "AddSerFaci", new { id = Model.HotelIndex }, htmlAttributes: new { @class = "btn btn-success" })
+    @Html.ActionLink("房型與外觀", "AddRoomTypeOutLook", new { id = Model.HotelIndex }, htmlAttributes: new { @class = "btn btn-info" })
+    @Html.ActionLink("附近與旅館設施", "AddNearbyHotelFaci", new { id = Model.HotelIndex }, htmlAttributes: new { @class = "btn btn-default" })
+</div>

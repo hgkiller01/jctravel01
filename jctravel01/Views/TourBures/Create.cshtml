@@ -1,0 +1,196 @@
+﻿@model jctravel01.Models.TourBure
+
+@{
+    ViewBag.Title = "新增旅遊局";
+}
+@section scripts{
+    <script>
+
+        $(function () {
+            $("#CountryIndex").change(function () {
+                var selectedValue = $('#CountryIndex option:selected').val();
+
+                if ($.trim(selectedValue).length > 0) {
+                    GetState_no(selectedValue);
+                }
+
+            })
+            $("#StateIndex").change(function () {
+                var selectedValue = $('#StateIndex option:selected').val();
+                if ($.trim(selectedValue).length > 0) {
+                    GetCity_no(selectedValue);
+                }
+                else {
+                    $("#CityIndex").empty();
+                    $('#CityIndex').append($('<option></option>').val('').text('------'));
+                }
+            })
+        })
+
+        function GetCity_no(StateIndex) {
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("GetCity_no")",
+                data: { StateIndex: StateIndex },
+                dataType: 'json',
+                success: function (data) {
+                    if (data.length > 0) {
+                        $("#CityIndex").empty();
+                        $.each(data, function (i, item) {
+                            $('#CityIndex').append($('<option></option>').val(item.CityIndex).text(item.City_no + " " + item.Cname));
+                        })
+                    }
+                    else {
+                        $("#CityIndex").empty();
+                        $('#CityIndex').append($('<option></option>').val('').text('------'));
+                    }
+                }
+
+            })
+        }
+        function GetState_no(CountryIndex) {
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("GetState_no")",
+                data: { CountryIndex: CountryIndex },
+                dataType: 'json',
+                success: function (data) {
+                    if (data.length > 0) {
+                        $("#StateIndex").empty();
+                        $.each(data, function (i, item) {
+                            $('#StateIndex').append($('<option></option>').val(item.StateIndex).text(item.State_no + " " + item.Cname));
+                        })
+                        var selectedValue = $('#StateIndex option:selected').val();
+                        if ($.trim(selectedValue).length > 0) {
+                            GetCity_no(selectedValue);
+                        }
+                    }
+                    else {
+                        $("#StateIndex").empty();
+                        $('#StateIndex').append($('<option></option>').val('').text('------'));
+                        $("#CityIndex").empty();
+                        $('#CityIndex').append($('<option></option>').val('').text('------'));
+                    }
+                }
+
+            })
+        }
+    </script>
+}
+<h2>新增旅遊局</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="row">
+        <h4>填取下列資料</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-inline">
+            <div class="form-group col-md-4">
+                @Html.LabelFor(model => model.CountryIndex, htmlAttributes: new { @class = "control-label col-md-7" })
+                <div class="col-md-10 input-group">
+                    <span class="input-group-addon" style="color:red">*</span>
+                    @Html.DropDownList("CountryIndex", null, htmlAttributes: new { @class = "form-control" })
+                </div>
+                <p>@Html.ValidationMessageFor(model => model.CountryIndex, "", new { @class = "text-danger" })</p>
+            </div>
+
+            <div class="form-group col-md-4">
+                @Html.LabelFor(model => model.StateIndex, htmlAttributes: new { @class = "control-label col-md-7" })
+                <div class="col-md-10 input-group">
+                    <span class="input-group-addon" style="color:red">*</span>
+                    @Html.DropDownList("StateIndex", null, htmlAttributes: new { @class = "form-control" })
+                </div>
+                <p>@Html.ValidationMessageFor(model => model.StateIndex, "", new { @class = "text-danger" })</p>
+            </div>
+        </div>
+
+        <div class="form-group col-md-4">
+            @Html.LabelFor(model => model.CityIndex, htmlAttributes: new { @class = "control-label col-md-7" })
+            <div class="col-md-10 input-group">
+                <span class="input-group-addon" style="color:red">*</span>
+                @Html.DropDownList("CityIndex", null, htmlAttributes: new { @class = "form-control" })
+            </div>
+            <p>@Html.ValidationMessageFor(model => model.CityIndex, "", new { @class = "text-danger" })</p>
+        </div>
+    </div>
+    <div class="form-inline">
+        <div class="form-group col-md-4">
+            @Html.LabelFor(model => model.Cname, htmlAttributes: new { @class = "control-label col-md-7" })
+            <div class="col-md-10 input-group">
+                <span class="input-group-addon" style="color:red">*</span>
+                @Html.EditorFor(model => model.Cname, new { htmlAttributes = new { @class = "form-control", placeholder = "廈門旅遊局" } })
+            </div>
+            <p>@Html.ValidationMessageFor(model => model.Cname, "", new { @class = "text-danger" })</p>
+        </div>
+
+        <div class="form-group col-md-4">
+            @Html.LabelFor(model => model.Ename, htmlAttributes: new { @class = "control-label col-md-7" })
+            <div class="col-md-10 input-group">
+                <span class="input-group-addon" style="color:red">*</span>
+                @Html.EditorFor(model => model.Ename, new { htmlAttributes = new { @class = "form-control", placeholder = "XIAMEN tourisim bureau" } })
+            </div>
+            <p>@Html.ValidationMessageFor(model => model.Ename, "", new { @class = "text-danger" })</p>
+        </div>
+
+        <div class="form-group col-md-4">
+            @Html.LabelFor(model => model.Tele_number, htmlAttributes: new { @class = "control-label col-md-7" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Tele_number, new { htmlAttributes = new { @class = "form-control", placeholder = "0592-5319159" } })
+                @Html.ValidationMessageFor(model => model.Tele_number, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <div class="form-inline">
+        <div class="form-group col-md-4">
+            @Html.LabelFor(model => model.Fax, htmlAttributes: new { @class = "control-label col-md-7" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Fax, new { htmlAttributes = new { @class = "form-control", placeholder = "0592-5319159" } })
+                @Html.ValidationMessageFor(model => model.Fax, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group col-md-4">
+            @Html.LabelFor(model => model.URL, htmlAttributes: new { @class = "control-label col-md-7" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.URL, new { htmlAttributes = new { @class = "form-control", placeholder = "http://www.xmtravel.com.cn/" } })
+                @Html.ValidationMessageFor(model => model.URL, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group col-md-4">
+            @Html.LabelFor(model => model.eMail, htmlAttributes: new { @class = "control-label col-md-7" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.eMail, new { htmlAttributes = new { @class = "form-control", placeholder = "service@visitxm.com" } })
+                @Html.ValidationMessageFor(model => model.eMail, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group col-md-12">
+        @Html.LabelFor(model => model.Addr, htmlAttributes: new { @class = "control-label col-md-7" })
+        <div class="col-md-12">
+            @Html.EditorFor(model => model.Addr, new { htmlAttributes = new { @class = "form-control", style = "Width:100%", placeholder = "福建省厦门市厦禾路1118号假日商城15楼" } })
+            @Html.ValidationMessageFor(model => model.Addr, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group col-md-4">
+        @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-7" })
+        <div class="col-md-10">
+            @*@Html.EditorFor(model => model.Status, new { htmlAttributes = new { @class = "form-control" } })*@
+            @Html.DropDownList("Status", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group col-md-12">
+        <div class="col-md-offset-4 col-md-10">
+            <input type="submit" value="確定" class="btn btn-info" />
+            @Html.ActionLink("取消", "Index", null, htmlAttributes: new { @class = "btn btn-primary" })
+        </div>
+    </div>
+}

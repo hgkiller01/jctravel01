@@ -1,0 +1,114 @@
+﻿@model jctravel01.Models.Img
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Img</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CompanyNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CompanyNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.POI_Type)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.POI_Type)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OrderNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OrderNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ImgPath)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ImgPath)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ImgInfo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ImgInfo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreateBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreateBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreateBy_Time)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreateBy_Time)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UpdateBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UpdateBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UpdateBy_Time)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UpdateBy_Time)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Hotel.Holtel_no)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Hotel.Holtel_no)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Restaurant.Rest_no)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Restaurant.Rest_no)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Scenery.Scenery_no)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Scenery.Scenery_no)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ImgIndex }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

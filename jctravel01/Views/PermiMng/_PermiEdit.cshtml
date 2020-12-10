@@ -1,0 +1,30 @@
+﻿@model jctravel01.Models.ViewModel.PermiList
+@using MvcCheckBoxList.Model
+
+@{
+    ViewBag.Title = "更改權限群組";
+}
+@section scripts{
+    @if (ViewBag.Alert != null)
+    {
+        <script>
+            alert('@ViewBag.Alert')
+        </script>
+    }
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+}
+<h2 class="modal-title text-center" id="myModalLabel">更改權限群組</h2>
+    @using (Ajax.BeginForm("Edit", new AjaxOptions { OnSuccess = "alert('更改成功')", InsertionMode = InsertionMode.Replace, HttpMethod = "Post" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.EmpIndex)
+        <div class="col-md-offset-4">
+        @Html.CheckBoxListFor(model => model.GroupIndex, model => model.PermiGroupList,
+        model => model.PermiGpIndex,
+        model => model.PermiGpName,
+        model => model.IsSelected,
+        Position.Vertical)
+        </div>
+       <p class="text-center"><input type="submit" class="btn btn-success" value="確定" /></p> 
+    }
+

@@ -1,0 +1,45 @@
+﻿@model jctravel01.Models.ViewModel.PictureListViewModel
+
+@{
+    ViewBag.Title = "元件圖列表";
+}
+@section styles{
+    <style>
+        .image{
+            width:80%;
+            height:80%;
+        }
+    </style>
+}
+<h2>點擊圖片編輯</h2>
+
+@if(Model.scenery != null)
+{
+    foreach (var item in Model.scenery.Img)
+    {
+        <div class="col-md-4">
+            <a href="@Url.Action("Edit", new {id = item.ImgIndex })"><img class="image" title="@item.ImgInfo"  src="@Url.Content("~"+item.ImgPath)" /></a>
+        </div>
+    }    
+}
+@if (Model.hotel != null)
+{
+    foreach (var item in Model.hotel.Img)
+    {
+        <div class="col-lg-4">
+            <a href="@Url.Action("Edit", new {id = item.ImgIndex })"><img class="image" title="@item.ImgInfo"  src="@Url.Content("~"+item.ImgPath)" /></a>
+        </div>
+    }
+}
+@if (Model.restaurant != null)
+{
+    foreach (var item in Model.restaurant.Img)
+    {
+        <div class="col-lg-4">
+            <a href="@Url.Action("Edit", new {id = item.ImgIndex })"><img class="image" title="@item.ImgInfo" src="@Url.Content("~"+item.ImgPath)" /></a>
+        </div>
+    }
+}
+<div class="col-lg-offset-6 col-md-12" style="padding-top:20px;">
+    @Html.ActionLink("回列表", "Index", "", htmlAttributes: new {@class ="btn btn-info" })
+</div>

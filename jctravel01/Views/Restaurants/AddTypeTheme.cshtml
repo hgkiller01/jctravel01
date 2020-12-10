@@ -1,0 +1,95 @@
+﻿@model jctravel01.Models.ViewModel.TypeThemeRViewModel
+
+@{
+    ViewBag.Title = "更改形態與主題";
+}
+@section scripts{
+
+    @if (TempData["Success"] != null)
+    {
+        <script>
+            alert("@TempData["Success"]");
+        </script>
+    }
+}
+
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.CompanyNo)
+    <div class="form-horizontal col-md-offset-1">
+        <h2 class="col-lg-offset-2">請選擇此餐廳的形態與主題</h2>
+        <div class="form-group">
+            @Html.LabelFor(model => model.rest_no, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @*@Html.EditorFor(model => model.scenery.Scenery_no, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })*@
+                @Html.DisplayFor(model => model.rest_no)
+                @Html.HiddenFor(model => model.restIndex)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.ResName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @*@Html.EditorFor(model => model.scenery.Cname, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })*@
+                @Html.DisplayFor(model => model.ResName)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.theme1.FirstOrDefault().Theme_index, "主題", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @*@Html.ListBoxFor(model => model.Theme_index, Model.themeList, htmlAttributes: new { @class = "form-control" })*@
+                @foreach (var item in Model.themeList)
+                {
+                    if (item.Selected)
+                    {
+                        <label class="checkbox-inline"><input type="checkbox" name="Theme_index" value="@item.Value" checked />@item.Text</label>
+                    }
+                    else
+                    {
+                        <label class="checkbox-inline"><input type="checkbox" name="Theme_index" value="@item.Value" />@item.Text</label>
+                    }
+                }
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.type1.FirstOrDefault().Type_index, "型態", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @*@Html.ListBoxFor(model => model.Type_index, selectList: Model.typeList, htmlAttributes: new { @class = "form-control" })*@
+                @foreach (var item in Model.typeList)
+                {
+                    if (item.Selected)
+                    {
+                        <label class="checkbox-inline"><input type="checkbox" name="Type_index" value="@item.Value" checked />@item.Text</label>
+                    }
+                    else
+                    {
+                        <label class="checkbox-inline"><input type="checkbox" name="Type_index" value="@item.Value" />@item.Text</label>
+                    }
+                }
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="確定" class="btn btn-info" />|               
+                @Html.ActionLink("取消", "Index", null, htmlAttributes: new { @class = "btn btn-primary" })
+            </div>
+        </div>
+        <div class="panel panel-default col-md-offset-2 col-md-7">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    其他選項
+                </h3>
+            </div>
+            <div class="panel-body">
+                @Html.ActionLink("選擇氣氛與餐食方式", "AddDiningAmos", new { id = Model.restIndex }, htmlAttributes: new { @class = "btn btn-info" })|
+                @Html.ActionLink("上傳圖片", "UploadImages", new { id = Model.restIndex }, htmlAttributes: new { @class = "btn btn-success" })
+            </div>
+        </div>
+
+        
+    </div>
+
+}

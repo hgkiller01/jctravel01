@@ -1,0 +1,120 @@
+﻿@model jctravel01.Models.PermiGruop
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>PermiGruop</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PermiGpNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PermiGpNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PermiGpName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PermiGpName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Descri)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descri)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SharePermi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SharePermi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ChPermi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ChPermi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReadPermi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReadPermi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreateBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreateBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreateBy_Time)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreateBy_Time)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UpdateBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UpdateBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UpdateBy_Time)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UpdateBy_Time)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CoIndex.ComName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CoIndex.ComName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PermiIndex1.PermiNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PermiIndex1.PermiNo)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

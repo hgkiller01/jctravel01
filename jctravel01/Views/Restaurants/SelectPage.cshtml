@@ -1,0 +1,14 @@
+﻿@model jctravel01.Models.Restaurant
+
+@{
+    ViewBag.Title = "增加選項";
+}
+
+
+<div class="col-lg-offset-3">
+    <h2>你可以選擇</h2>
+    @Html.ActionLink("選擇型態與主題", "AddTypeTheme", new { id = Model.RestIndex }, htmlAttributes: new { @class = "btn btn-primary" })
+    @Html.ActionLink("選擇氣氛與餐食方式", "AddDiningAmos", new { id = Model.RestIndex }, htmlAttributes: new {@class="btn btn-info" })
+    @Html.ActionLink("回到列表", "Index", new {Page = 1 }, htmlAttributes: new { @class = "btn btn-primary" })
+</div>
+
